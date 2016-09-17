@@ -17,12 +17,30 @@ var Jamamoji = function( name, icon ) {
   this.damage = 0;
   this.health = 100;
   this.special = 3;
-  this.opponent_bonus = 0
-  this.block = 0
-  this.opponent_special = 3
+  this.opponent_bonus = 0;
+  this.block = 0;
+  this.opponent_special = 3;
+  this.level = 1;
+  this.happyCount = 0;
 }
 
 Jamamoji.prototype = {
+
+  countHappiness: function() {
+    setInterval( function() {
+      if( this.icon === this.originalIcon ) {
+        this.happyCount += 1;
+        this.checkForLevels();
+      }
+    }.bind( this ), 1000 )
+  },
+
+  checkForLevels: function() {
+    if( this.happyCount % 10 === 0 ) {
+      this.level += 1;
+      console.log( this.level );
+    }
+  },
 
   eatAtStartUp: function() {
     var burger = new Food();
