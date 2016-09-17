@@ -44,11 +44,10 @@ Jamamoji.prototype = {
     setInterval( function() {
       var total = this.food.length;
       this.digest( total );
-    }.bind( this ), 2000)
+    }.bind( this ), 10000)
   },
 
   digest: function( total ) {
-    console.log( total );
     if( total > 0 ) {
       this.food.pop()
       this.poop()
@@ -59,19 +58,17 @@ Jamamoji.prototype = {
   },
 
   poop: function() {
-    console.log( "poop" );
     setTimeout( function() {
-      // var plop = new Poop();
-      // this.waste.push( plop );
-    }.bind( this ) , 2000)
+      var plop = new Poop();
+      this.waste.push( plop );
+    }.bind( this ) , 5000)
     return;
   },
 
   emptyPoop: function() {
-    console.log( "emptyPoop" );
     setTimeout( function() {
-      // var plop = new Poop();
-      // this.waste.push( plop );
+      var plop = new Poop();
+      this.waste.push( plop );
     }.bind( this ) , 10000)
     return;
   },
