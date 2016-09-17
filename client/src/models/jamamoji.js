@@ -27,6 +27,9 @@ var Jamamoji = function( name, icon ) {
 Jamamoji.prototype = {
 
   countHappiness: function() {
+    if( this.pause ) {
+      return;
+    }
     setInterval( function() {
       if( this.icon === this.originalIcon ) {
         this.happyCount += 1;

@@ -377,6 +377,9 @@
 	Jamamoji.prototype = {
 	
 	  countHappiness: function() {
+	    if( this.pause ) {
+	      return;
+	    }
 	    setInterval( function() {
 	      if( this.icon === this.originalIcon ) {
 	        this.happyCount += 1;
@@ -17413,23 +17416,23 @@
 	var SignOutView = __webpack_require__( 4 );
 	var FightView = __webpack_require__( 11 );
 	
-	var Jamamoji = __webpack_require__( 5 );
-	var BattleJamamoji = __webpack_require__( 12 );
-	var Arena = __webpack_require__( 13 );
-	var Game = __webpack_require__( 14 );
+	// var Jamamoji = require( '../models/jamamoji' );
+	// var BattleJamamoji = require( '../models/battleJamamoji' );
+	// var Arena = require( '../models/arena' );
+	// var Game = require( '../models/game' );
 	
-	var j1 = new Jamamoji( "jeff", "🤓" );
-	j1.position = 3;
-	var j2 = new Jamamoji( "dave", "😀" );
-	j2.position = 6;
+	// var j1 = new Jamamoji( "jeff", "🤓" );
+	// j1.position = 3;
+	// var j2 = new Jamamoji( "dave", "😀" );
+	// j2.position = 6;
 	
-	var b1 = new BattleJamamoji( j1 );
-	var b2 = new BattleJamamoji( j2 );
-	var players = [ b1, b2 ];
-	var arena = new Arena();
-	var game = new Game( players, arena );
-	arena.spawnPlayers( b1, b2 );
-	game.randomStart();
+	// var b1 = new BattleJamamoji( j1 );
+	// var b2 = new BattleJamamoji( j2 );
+	// var players = [ b1, b2 ];
+	// var arena = new Arena();
+	// var game = new Game( players, arena );
+	// arena.spawnPlayers( b1, b2 );
+	// game.randomStart();
 	
 	var MainView = function( pet ) {
 	  this.pet = pet;
@@ -17439,6 +17442,7 @@
 	  this.pet.setMood();
 	  this.pet.countHappiness();
 	  this.displaySignOut( this.pet );
+	  this.icons = [];
 	}
 	
 	MainView.prototype = {
@@ -17492,9 +17496,13 @@
 	
 	    var fightButton = document.createElement( 'button' );
 	    fightButton.onclick = function() {
-	      this.haveFight( this.pet );
+	      this.haveFight( this.pet, this.icons );
 	    }.bind( this );
 	    fightPlace.appendChild( fightButton );
+	
+	    this.icons.push( petIcon );
+	    this.icons.push( foodIcon );
+	    this.icons.push( poopIcon );
 	  },
 	
 	  displaySignOut: function( pet ) {
@@ -17502,10 +17510,22 @@
 	    view.display();
 	  },
 	
-	  haveFight: function( pet ) {
+	  haveFight: function( pet, icons ) {
 	    pet.pause();
-	    var fight = new FightView( arena, game );
-	  }
+	    var fight = new FightView();
+	    console.log( this.icons );
+	    this.hide( this.icons );
+	  },
+	
+	  hide: function( icons ) {
+	    for( var i = 0; i < icons.length; i++ ) {
+	      icons[i].className = 'hidden';
+	    }
+	  },
+	
+	  show: function() {
+	
+	  },
 	
 	
 	}
@@ -17515,33 +17535,33 @@
 
 /***/ },
 /* 11 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	// var Jamamoji = require( '../models/jamamoji' );
-	// var BattleJamamoji = require( '../models/battleJamamoji' );
-	// var Arena = require( '../models/arena' );
-	// var Game = require( '../models/game' );
+	var Jamamoji = __webpack_require__( 5 );
+	var BattleJamamoji = __webpack_require__( 12 );
+	var Arena = __webpack_require__( 13 );
+	var Game = __webpack_require__( 14 );
 	
-	// var j1 = new Jamamoji( "jeff", "🤓" );
-	// j1.position = 3;
-	// var j2 = new Jamamoji( "dave", "😀" );
-	// j2.position = 6;
+	var FightView = function() {
+	  var j1 = new Jamamoji( "jeff", "🤓" );
+	  j1.position = 3;
+	  var j2 = new Jamamoji( "dave", "😀" );
+	  j2.position = 6;
 	
-	// var b1 = new BattleJamamoji( j1 );
-	// var b2 = new BattleJamamoji( j2 );
-	// var players = [ b1, b2 ];
-	// var arena = new Arena();
-	// var game = new Game( players, arena );
-	// arena.spawnPlayers( b1, b2 );
-	// game.randomStart();
+	  var b1 = new BattleJamamoji( j1 );
+	  var b2 = new BattleJamamoji( j2 );
+	  var players = [ b1, b2 ];
+	  var arena = new Arena();
+	  var game = new Game( players, arena );
+	  arena.spawnPlayers( b1, b2 );
+	  game.randomStart();
 	
-	
-	var FightView = function( arena, game ) {
 	  this.arena = arena;
 	  this.game = game;
-	console.log( this.game );
-	
+	  console.log( this.game );
 	}
+	
+	
 	
 	module.exports = FightView;
 

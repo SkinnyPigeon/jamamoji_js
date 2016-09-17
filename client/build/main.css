@@ -10,7 +10,16 @@ h1#pet.aliveAndWell {
   bottom: 0.01em;
   position: absolute;
   margin: 0;
+  display: block;
   -webkit-animation: rightThenLeft 15s infinite;
+}
+
+h1#pet.hidden {
+  display: none;
+}
+
+h2.hidden {
+  display: none;
 }
 
 h1#pet.bored {
@@ -18,6 +27,7 @@ h1#pet.bored {
   bottom: 0.01em;
   position: absolute;
   margin: 0;
+  display: block;
   -webkit-animation: upAndDown 3s infinite;
 }
 
@@ -26,6 +36,7 @@ h1#pet.ill {
   bottom: 0.01em;
   position: absolute;
   margin: 0;
+  display: block;
   -webkit-animation: shaking 2s infinite;
 }
 
@@ -34,10 +45,13 @@ h1#pet.dead {
   bottom: 0.01em;
   position: absolute;
   margin: 0;
+  display: block;
+
 }
 
-h2 {
+h2.icons {
   font-size: 2vw;
+  display: block;
 }
 
 img {
