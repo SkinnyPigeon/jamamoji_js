@@ -142,6 +142,14 @@ Jamamoji.prototype = {
     }
   },
 
+  cure: function() {
+    if( this.icon === "☠️" ) {
+      return;
+    }
+    this.sick = false;
+    this.icon = "😒";
+  },
+
 }
 
 module.exports = Jamamoji;

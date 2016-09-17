@@ -458,6 +458,14 @@
 	    }
 	  },
 	
+	  cure: function() {
+	    if( this.icon === "☠️" ) {
+	      return;
+	    }
+	    this.sick = false;
+	    this.icon = "😒";
+	  },
+	
 	}
 	
 	module.exports = Jamamoji;
@@ -17269,6 +17277,7 @@
 	  display: function() {
 	    var cleanPoop = document.getElementById( 'clean-poop' );
 	    var feedPlace = document.getElementById( 'feed-place' );
+	    var medicinePlace = document.getElementById( 'give-medicine' );
 	    var petPlace = document.getElementById( 'pet-place' );
 	    var poopPlace = document.getElementById( 'poop-place' );
 	    var giveFood = document.getElementById( 'give-food' );
@@ -17304,6 +17313,12 @@
 	     this.pet.eat();
 	    }.bind( this )
 	    giveFood.appendChild( feedButton );
+	
+	    var cureButton = document.createElement( 'button' );
+	    cureButton.onclick = function() {
+	      this.pet.cure();
+	    }.bind( this );
+	    medicinePlace.appendChild( cureButton );
 	  }
 	}
 	
