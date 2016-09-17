@@ -1,3 +1,5 @@
+var Poop = require( '../models/poop' );
+var Food = require( '../models/food' );
 var Jamamoji = require( '../models/jamamoji' );
 
 var JamamojiView = function( user ) {
@@ -14,7 +16,6 @@ JamamojiView.prototype = {
     request.onload = () => {
       if( request.status === 200 ) {
         var jamamojis = JSON.parse( request.responseText );
-        console.log( "Jammer", jamamojis );
         this.pickJamamoji( jamamojis );
       }
     }
@@ -33,6 +34,7 @@ JamamojiView.prototype = {
   makeJamamoji: function( jamamoji ) {
     var pet = new Jamamoji( jamamoji.name, jamamoji.icon );
     console.log( pet );
+
   },
 }
 
