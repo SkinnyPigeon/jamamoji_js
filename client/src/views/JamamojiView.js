@@ -1,5 +1,3 @@
-var Poop = require( '../models/poop' );
-var Food = require( '../models/food' );
 var Jamamoji = require( '../models/jamamoji' );
 
 var JamamojiView = function( user ) {
@@ -48,7 +46,12 @@ JamamojiView.prototype = {
   },
 
   fillPet: function( newPet, storedPet ) {
-    
+    for( var i = 0; i  < storedPet.food; i++ ) {
+      newPet.eat();
+    }
+    for( var i = 0; i < storedPet.waste; i++ ) {
+      newPet.poop();
+    }
   },
 }
 

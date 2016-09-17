@@ -143,8 +143,6 @@
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Poop = __webpack_require__( !(function webpackMissingModule() { var e = new Error("Cannot find module \"../models/poop\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()) );
-	var Food = __webpack_require__( !(function webpackMissingModule() { var e = new Error("Cannot find module \"../models/food\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()) );
 	var Jamamoji = __webpack_require__( 5 );
 	
 	var JamamojiView = function( user ) {
@@ -193,7 +191,12 @@
 	  },
 	
 	  fillPet: function( newPet, storedPet ) {
-	    
+	    for( var i = 0; i  < storedPet.food; i++ ) {
+	      newPet.eat();
+	    }
+	    for( var i = 0; i < storedPet.waste; i++ ) {
+	      newPet.poop();
+	    }
 	  },
 	}
 	
