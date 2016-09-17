@@ -344,6 +344,10 @@
 	  },
 	
 	  eat: function() {
+	    if( this.food.length >= 8 ) {
+	      this.icon = "☠️";
+	      this.alive = false;
+	    }
 	    var burger = new Food();
 	    this.food.push( burger );
 	  },
@@ -357,6 +361,9 @@
 	  },
 	  
 	  hunger: function() {
+	    if( this.icon === "☠️" ) {
+	      return;
+	    }
 	    setInterval( function() {
 	      var total = this.food.length;
 	      this.digest( total );
@@ -364,6 +371,9 @@
 	  },
 	
 	  digest: function( total ) {
+	    if( this.icon === "☠️" ) {
+	      return;
+	    }
 	    if( total > 0 ) {
 	      this.food.pop()
 	      this.poop()
@@ -374,6 +384,9 @@
 	  },
 	
 	  poop: function() {
+	    if( this.icon === "☠️" ) {
+	      return;
+	    }
 	    setTimeout( function() {
 	      var plop = new Poop();
 	      this.waste.push( plop );
@@ -382,6 +395,9 @@
 	  },
 	
 	  emptyPoop: function() {
+	    if( this.icon === "☠️" ) {
+	      return;
+	    }
 	    setTimeout( function() {
 	      var plop = new Poop();
 	      this.waste.push( plop );
