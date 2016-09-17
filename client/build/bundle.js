@@ -398,6 +398,9 @@
 	  },
 	
 	  eat: function() {
+	    if( this.pause ) {
+	      return;
+	    }
 	    if( this.checkDead() ) {
 	      return;
 	    }
@@ -420,6 +423,9 @@
 	  },
 	  
 	  hunger: function() {
+	    if( this.pause ) {
+	      return;
+	    }
 	    if( this.checkDead() ) {
 	      return;
 	    }
@@ -430,6 +436,9 @@
 	  },
 	
 	  digest: function( total ) {
+	    if( this.pause ) {
+	      return;
+	    }
 	    if( this.checkDead() ) {
 	      return;
 	    }
@@ -443,6 +452,9 @@
 	  },
 	
 	  poop: function() {
+	    if( this.pause ) {
+	      return;
+	    }
 	    if( this.checkDead() ) {
 	      return;
 	    }
@@ -454,6 +466,9 @@
 	  },
 	
 	  emptyPoop: function() {
+	    if( this.pause ) {
+	      return;
+	    }
 	    if( this.checkDead() ) {
 	      return;
 	    }
@@ -473,6 +488,9 @@
 	  },
 	
 	  cleanPoop: function() {
+	    if( this.pause ) {
+	      return;
+	    }
 	    if( this.checkDead() ) {
 	      return;
 	    }
@@ -480,6 +498,9 @@
 	  },
 	
 	  dead: function() {
+	    if( this.pause ) {
+	      return;
+	    }
 	    setInterval( function() {
 	      if( this.health <= 0 || 
 	          this.waste.length >= 5 ) {
@@ -492,6 +513,9 @@
 	  },
 	
 	  sick: function() {
+	    if( this.pause ) {
+	      return;
+	    }
 	    setInterval( function() {
 	      if( this.checkDead() ) {
 	        return;
@@ -506,6 +530,9 @@
 	  },
 	
 	  setMood: function() {
+	    if( this.pause ) {
+	      return;
+	    }
 	    setInterval( function() {
 	      if( this.icon === "😷" || this.icon === "☠️" ) {
 	        return;
@@ -575,6 +602,14 @@
 	    var pet = document.getElementById( 'pet' );
 	    return pet;
 	  },
+	
+	  pause: function() {
+	    this.pause = true;
+	  },
+	
+	  resume: function() {
+	    this.pause = false;
+	  }
 	
 	}
 	
@@ -17457,7 +17492,7 @@
 	
 	    var fightButton = document.createElement( 'button' );
 	    fightButton.onclick = function() {
-	      this.haveFight();
+	      this.haveFight( this.pet );
 	    }.bind( this );
 	    fightPlace.appendChild( fightButton );
 	  },
@@ -17467,7 +17502,8 @@
 	    view.display();
 	  },
 	
-	  haveFight: function() {
+	  haveFight: function( pet ) {
+	    pet.pause();
 	    var fight = new FightView( arena, game );
 	  }
 	
@@ -17519,10 +17555,10 @@
 	  this.health = jamamoji.health;
 	  this.energy = jamamoji.energy;
 	  this.position = jamamoji.position;
-	  this.opponentBonus = jamamoji.opponentBonus;
+	  this.opponentBonus = jamamoji.opponent_bonus;
 	  this.block = jamamoji.block;
 	  this.originalBlock = jamamoji.block;
-	  this.opponentSpecial = jamamoji.opponentSpecial;
+	  this.opponentSpecial = jamamoji.opponent_special;
 	}
 	
 	BattleJamamoji.prototype = {

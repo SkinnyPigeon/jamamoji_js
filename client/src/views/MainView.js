@@ -80,7 +80,7 @@ MainView.prototype = {
 
     var fightButton = document.createElement( 'button' );
     fightButton.onclick = function() {
-      this.haveFight();
+      this.haveFight( this.pet );
     }.bind( this );
     fightPlace.appendChild( fightButton );
   },
@@ -90,7 +90,8 @@ MainView.prototype = {
     view.display();
   },
 
-  haveFight: function() {
+  haveFight: function( pet ) {
+    pet.pause();
     var fight = new FightView( arena, game );
   }
 

@@ -48,6 +48,9 @@ Jamamoji.prototype = {
   },
 
   eat: function() {
+    if( this.pause ) {
+      return;
+    }
     if( this.checkDead() ) {
       return;
     }
@@ -70,6 +73,9 @@ Jamamoji.prototype = {
   },
   
   hunger: function() {
+    if( this.pause ) {
+      return;
+    }
     if( this.checkDead() ) {
       return;
     }
@@ -80,6 +86,9 @@ Jamamoji.prototype = {
   },
 
   digest: function( total ) {
+    if( this.pause ) {
+      return;
+    }
     if( this.checkDead() ) {
       return;
     }
@@ -93,6 +102,9 @@ Jamamoji.prototype = {
   },
 
   poop: function() {
+    if( this.pause ) {
+      return;
+    }
     if( this.checkDead() ) {
       return;
     }
@@ -104,6 +116,9 @@ Jamamoji.prototype = {
   },
 
   emptyPoop: function() {
+    if( this.pause ) {
+      return;
+    }
     if( this.checkDead() ) {
       return;
     }
@@ -123,6 +138,9 @@ Jamamoji.prototype = {
   },
 
   cleanPoop: function() {
+    if( this.pause ) {
+      return;
+    }
     if( this.checkDead() ) {
       return;
     }
@@ -130,6 +148,9 @@ Jamamoji.prototype = {
   },
 
   dead: function() {
+    if( this.pause ) {
+      return;
+    }
     setInterval( function() {
       if( this.health <= 0 || 
           this.waste.length >= 5 ) {
@@ -142,6 +163,9 @@ Jamamoji.prototype = {
   },
 
   sick: function() {
+    if( this.pause ) {
+      return;
+    }
     setInterval( function() {
       if( this.checkDead() ) {
         return;
@@ -156,6 +180,9 @@ Jamamoji.prototype = {
   },
 
   setMood: function() {
+    if( this.pause ) {
+      return;
+    }
     setInterval( function() {
       if( this.icon === "😷" || this.icon === "☠️" ) {
         return;
@@ -225,6 +252,14 @@ Jamamoji.prototype = {
     var pet = document.getElementById( 'pet' );
     return pet;
   },
+
+  pause: function() {
+    this.pause = true;
+  },
+
+  resume: function() {
+    this.pause = false;
+  }
 
 }
 
