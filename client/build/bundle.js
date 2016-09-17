@@ -358,7 +358,7 @@
 	  },
 	  
 	  hunger: function() {
-	    setTimeout( function() {
+	    setInterval( function() {
 	      this.digest();
 	    }.bind( this ), 2000)
 	  },
