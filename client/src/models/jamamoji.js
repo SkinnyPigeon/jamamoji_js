@@ -45,22 +45,24 @@ Jamamoji.prototype = {
   
   hunger: function() {
     setInterval( function() {
-      this.digest();
-    }.bind( this ), 5000)
+      var total = this.food.length;
+      this.digest( total );
+    }.bind( this ), 2000)
   },
 
-  digest: function() {
-    console.log( this.food.length );
-    if( this.food.length > 0 ) {
+  digest: function( total ) {
+    console.log( total );
+    if( total > 0 ) {
       this.food.pop()
       this.poop()
     }
-    if( this.food.length === 0 ) {
+    if( total === 0 ) {
       this.emptyPoop();
     }
   },
 
   poop: function() {
+    console.log( "poop" );
     setTimeout( function() {
       var plop = new Poop();
       this.waste.push( plop );
@@ -68,6 +70,7 @@ Jamamoji.prototype = {
   },
 
   emptyPoop: function() {
+    console.log( "emptyPoop" );
     setTimeout( function() {
       var plop = new Poop();
       this.waste.push( plop );
@@ -83,10 +86,9 @@ Jamamoji.prototype = {
   },
 
   cleanPoop: function() {
-    var length = this.waste.length;
-    for( var i = 0; i < length; i++ ) {
-      this.waste.pop();
-    }
+    this.waste = [];
+    console.log( this.food );
+    console.log( this.waste );
   },
 
   dead: function() {

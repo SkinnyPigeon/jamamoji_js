@@ -4,7 +4,6 @@ body {
   animation: background 100s cubic-bezier(1,0,0,1) infinite;  
 }
 
-
 @-webkit-keyframes background {
   0% { background-color: #3399ff; }
   40% { background-color: #ffff66; }  
