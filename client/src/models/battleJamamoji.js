@@ -119,18 +119,22 @@ BattleJamamoji.prototype = {
   },
 
   chanceOfBonusKickDamage: function() {
-    var chance = Math.random * ( 20 - 1 ) + 1;
+    var chance = Math.floor(Math.random() * 21);
     if( chance > 19 ) {
-      return this.opponentBonus = 3;
+      this.opponentBonus = 3;
+      return;
     } else if( chance > 7 ) {
-      return this.opponent_bonus = 2;
+      this.opponentBonus = 2;
+      return;
     } else {
-      return this.opponent_bonus = 1;
+      this.opponentBonus = 1;
+      return;
     }
   },
 
   kickSetup: function() {
     this.block -= this.opponentBonus;
+    console.log( this.opponentBonus );
     if( this.block < 0 ) {
       this.health += this.block;
     }

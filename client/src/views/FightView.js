@@ -36,6 +36,7 @@ FightView.prototype = {
     this.moveLeft();
     this.moveRight();
     this.punch();
+    this.kick();
   },
 
   moveLeft: function(){
@@ -73,6 +74,19 @@ FightView.prototype = {
       this.display();
     }.bind( this );
     fightPlace.appendChild( punchButton );
+  },
+
+  kick: function() {
+    var fightPlace = document.getElementById( 'fight-place' );
+    var kickButton = document.createElement( 'button' );
+    kickButton.innerText = "kick";
+    kickButton.onclick = function() {
+      var currentPlayer = this.game.currentPlayer;
+      var otherPlayer = this.game.otherPlayer;
+      currentPlayer.kick( currentPlayer, otherPlayer, this.arena.state );
+      this.display();
+    }.bind( this );
+    fightPlace.appendChild( kickButton );
   },
 
   resetView: function() {

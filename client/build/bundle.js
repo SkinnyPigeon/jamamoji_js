@@ -17577,6 +17577,7 @@
 	    this.moveLeft();
 	    this.moveRight();
 	    this.punch();
+	    this.kick();
 	  },
 	
 	  moveLeft: function(){
@@ -17614,6 +17615,19 @@
 	      this.display();
 	    }.bind( this );
 	    fightPlace.appendChild( punchButton );
+	  },
+	
+	  kick: function() {
+	    var fightPlace = document.getElementById( 'fight-place' );
+	    var kickButton = document.createElement( 'button' );
+	    kickButton.innerText = "kick";
+	    kickButton.onclick = function() {
+	      var currentPlayer = this.game.currentPlayer;
+	      var otherPlayer = this.game.otherPlayer;
+	      currentPlayer.kick( currentPlayer, otherPlayer, this.arena.state );
+	      this.display();
+	    }.bind( this );
+	    fightPlace.appendChild( kickButton );
 	  },
 	
 	  resetView: function() {
@@ -17749,18 +17763,22 @@
 	  },
 	
 	  chanceOfBonusKickDamage: function() {
-	    var chance = Math.random * ( 20 - 1 ) + 1;
+	    var chance = Math.floor(Math.random() * 21);
 	    if( chance > 19 ) {
-	      return this.opponentBonus = 3;
+	      this.opponentBonus = 3;
+	      return;
 	    } else if( chance > 7 ) {
-	      return this.opponent_bonus = 2;
+	      this.opponentBonus = 2;
+	      return;
 	    } else {
-	      return this.opponent_bonus = 1;
+	      this.opponentBonus = 1;
+	      return;
 	    }
 	  },
 	
 	  kickSetup: function() {
 	    this.block -= this.opponentBonus;
+	    console.log( this.opponentBonus );
 	    if( this.block < 0 ) {
 	      this.health += this.block;
 	    }
