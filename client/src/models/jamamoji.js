@@ -28,6 +28,9 @@ Jamamoji.prototype = {
   },
 
   eat: function() {
+    if( this.checkDead() ) {
+      return;
+    }
     if( this.food.length >= 8 ) {
       this.icon = "☠️";
       this.alive = false;
@@ -45,7 +48,9 @@ Jamamoji.prototype = {
   },
   
   hunger: function() {
-    this.checkDead();
+    if( this.checkDead() ) {
+      return;
+    }
     setInterval( function() {
       var total = this.food.length;
       this.digest( total );
@@ -53,7 +58,9 @@ Jamamoji.prototype = {
   },
 
   digest: function( total ) {
-    this.checkDead();
+    if( this.checkDead() ) {
+      return;
+    }
     if( total > 0 ) {
       this.food.pop()
       this.poop()
@@ -64,7 +71,9 @@ Jamamoji.prototype = {
   },
 
   poop: function() {
-    this.checkDead();
+    if( this.checkDead() ) {
+      return;
+    }
     setTimeout( function() {
       var plop = new Poop();
       this.waste.push( plop );
@@ -73,7 +82,9 @@ Jamamoji.prototype = {
   },
 
   emptyPoop: function() {
-    this.checkDead();
+    if( this.checkDead() ) {
+      return;
+    }
     setTimeout( function() {
       var plop = new Poop();
       this.waste.push( plop );
@@ -90,6 +101,9 @@ Jamamoji.prototype = {
   },
 
   cleanPoop: function() {
+    if( this.checkDead() ) {
+      return;
+    }
     this.waste = [];
   },
 
@@ -105,7 +119,9 @@ Jamamoji.prototype = {
 
   sick: function() {
     setInterval( function() {
-    this.checkDead();
+      if( this.checkDead() ) {
+        return;
+      }
       if( this.waste.length >= 3 ) {
         this.ill = true;
         this.icon = "😷";
@@ -160,14 +176,16 @@ Jamamoji.prototype = {
   },
 
   cure: function() {
-    this.checkDead();
+    if( this.checkDead() ) {
+      return;
+    }
     this.sick = false;
     this.icon = "😒";
   },
 
   checkDead: function() {
     if( this.icon === "☠️" ) {
-      return;
+      return true;
     }
   },
 
