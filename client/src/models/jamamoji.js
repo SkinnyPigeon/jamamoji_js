@@ -36,7 +36,6 @@ Jamamoji.prototype = {
   showFood: function() {
     var food = []
     for( var i = 0; i < this.food.length; i++ ) {
-      console.log( "Hello" )
       food.push( this.food[i].icon );
     }
     return food;
