@@ -33,6 +33,7 @@ JamamojiView.prototype = {
   makeJamamoji: function( jamamoji ) {
     var pet = new Jamamoji( jamamoji.name, jamamoji.icon );
     console.log( pet );
+    pet.id = jamamoji.id;
     pet.alive = jamamoji.alive;
     pet.block = jamamoji.block;
     pet.damage = jamamoji.damage;

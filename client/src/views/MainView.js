@@ -1,9 +1,12 @@
+var SignOutView = require( '../views/SignOutView' );
+
 var MainView = function( pet ) {
   this.pet = pet;
   this.pet.hunger();
   this.pet.sick();
-  this.pet.setMood();
   this.pet.dead();
+  this.pet.setMood();
+  this.displaySignOut( this.pet );
 }
 
 MainView.prototype = {
@@ -53,7 +56,15 @@ MainView.prototype = {
       this.pet.cure();
     }.bind( this );
     medicinePlace.appendChild( cureButton );
-  }
+  },
+
+  displaySignOut: function( pet ) {
+    var view = new SignOutView( pet );
+    view.display();
+  },
+
+
 }
+
 
 module.exports = MainView;

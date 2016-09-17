@@ -34,6 +34,7 @@ LogInView.prototype = {
           password: passwordInput.value,
         }
       }
+      console.log( data );
       request.send( JSON.stringify( data ))
     }.bind( this );
 

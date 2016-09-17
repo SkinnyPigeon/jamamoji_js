@@ -1,6 +1,5 @@
 var LogInView = require( './views/LogInView' );
 var SignUpView = require( './views/SignUpView' );
-var SignOutView = require( './views/SignOutView' );
 
 window.onload = function() {
   main();
@@ -9,7 +8,6 @@ window.onload = function() {
 var main = function() {
   displayLogIn();
   displaySignUp();
-  displaySignOut();
 }
 
 var displayLogIn = function() {
@@ -22,7 +20,3 @@ var displaySignUp = function() {
   view.display();
 }
 
-var displaySignOut = function() {
-  var view = new SignOutView();
-  view.display();
-}

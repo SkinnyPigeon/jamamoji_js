@@ -3,6 +3,8 @@ var Poop = require( './poop' )
 var Food = require( './food' );
 
 var Jamamoji = function( name, icon ) {
+  this.id = null;
+  this.originalIcon = icon;
   this.name = name;
   this.icon = icon;
   this.food = [];
@@ -143,7 +145,7 @@ Jamamoji.prototype = {
       if( this.food.length >= 1 && 
           this.food.length <= 4 ) {
         this.happy = true
-        this.icon = "😀"
+        this.icon = this.originalIcon;
         var pet = this.getPet();
         pet.className = 'aliveAndWell'
       } else {
