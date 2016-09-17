@@ -17547,6 +17547,7 @@
 	var FightView = function() {
 	  var j1 = new Jamamoji( "jeff", "🤓" );
 	  j1.position = 3;
+	  j1.energy = 50;
 	  var j2 = new Jamamoji( "dave", "😀" );
 	  j2.position = 6;
 	
@@ -17575,6 +17576,7 @@
 	    fightPlace.appendChild( fight );
 	    this.moveLeft();
 	    this.moveRight();
+	    this.punch();
 	  },
 	
 	  moveLeft: function(){
@@ -17604,10 +17606,11 @@
 	  punch: function() {
 	    var fightPlace = document.getElementById( 'fight-place' );
 	    var punchButton = document.createElement( 'button' );
-	    punchButton.innerText = "right";
+	    punchButton.innerText = "punch";
 	    punchButton.onclick = function() {
-	      var player = this.game.currentPlayer;
-	      player.moveRight( player, this.arena.state );
+	      var currentPlayer = this.game.currentPlayer;
+	      var otherPlayer = this.game.otherPlayer;
+	      currentPlayer.punch( currentPlayer, otherPlayer, this.arena.state );
 	      this.display();
 	    }.bind( this );
 	    fightPlace.appendChild( punchButton );
