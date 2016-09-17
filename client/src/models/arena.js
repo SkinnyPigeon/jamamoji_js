@@ -1,0 +1,24 @@
+var _ = require( 'lodash' );
+
+var Arena = function() {
+  this.state = _.fill( Array(8), '_' );
+}
+
+Arena.prototype = {
+
+  spawnPlayers: function( guy1, guy2 ) {
+    this.state.splice( guy1.position, guy1.icon );
+    this.state.splice( guy2.position, guy2.icon );
+  },
+
+  showArena: function() {
+    var arena = []
+    for( var i = 0; i < this.state.length; i++ ) {
+      arena.push( this.food[i].icon );
+    }
+    return arena.join("");
+  },
+
+}
+
+module.exports = Arena;
