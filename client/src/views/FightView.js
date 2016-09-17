@@ -27,6 +27,7 @@ var FightView = function() {
 FightView.prototype = {
 
   display: function() {
+    this.resetView();
     var fightPlace = document.getElementById( 'fight-place' );
     var fight = document.createElement( 'h1' );
     fight.innerText = this.arena.showArena();
@@ -42,37 +43,17 @@ FightView.prototype = {
     leftButton.innerText = "left";
     this.icons.push( leftButton );
     leftButton.onclick = function() {
-      this.hide();
       var player = this.game.currentPlayer;
       player.moveLeft( player, this.arena.state );
-      this.show();
+      this.display();
     }.bind( this );
     fightPlace.appendChild( leftButton );
   },
 
-  hide: function() {
-    for( var i = 0; i < this.icons.length; i++ ) {
-      this.icons[i].className = 'hideFight';
-    }
-  },
-
-  show: function() {
-    // for( var i = 0; i < this.icons.length; i++ ) {
-    //   this.icons[i].className = 'showFight';
-    // }
+  resetView: function() {
     var fightPlace = document.getElementById( 'fight-place' );
-    var fight = document.createElement( 'h1' );
-    fight.innerText = this.arena.showArena();
-    fight.className = 'fightPlane';
-    fightPlace.appendChild( fight );
-    this.moveLeft();
-  },
-
-
-  
-
+    fightPlace.innerText = "";
+  }
 }
-
-
 
 module.exports = FightView;
