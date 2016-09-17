@@ -34,7 +34,21 @@ JamamojiView.prototype = {
   makeJamamoji: function( jamamoji ) {
     var pet = new Jamamoji( jamamoji.name, jamamoji.icon );
     console.log( pet );
+    pet.alive = jamamoji.alive;
+    pet.block = jamamoji.block;
+    pet.damage = jamamoji.damage;
+    pet.energy = jamamoji.energy;
+    pet.happy = jamamoji.happy;
+    pet.health = jamamoji.health;
+    pet.hungry = jamamoji.hungry;
+    pet.opponent_bonus = jamamoji.opponent_bonus;
+    pet.opponent_special = jamamoji.opponent_special;
+    pet.special = jamamoji.special;
+    this.fillPet( pet, jamamoji );
+  },
 
+  fillPet: function( newPet, storedPet ) {
+    
   },
 }
 
