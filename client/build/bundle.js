@@ -308,8 +308,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__( 6 )
-	// var Poop = require( './poop' )
-	// var Food = require( './food' );
+	var Poop = __webpack_require__( 8 )
+	var Food = __webpack_require__( 9 );
 	
 	var Jamamoji = function( name, icon ) {
 	  this.name = name;
@@ -340,7 +340,7 @@
 	    var food = []
 	    for( var i = 0; i < this.food.length; i++ ) {
 	      console.log( "Hello" )
-	      food.push(this.food[i].icon);
+	      food.push( this.food[i].icon );
 	    }
 	    return food;
 	  },
@@ -348,7 +348,7 @@
 	  hunger: function() {
 	    setTimeout( function() {
 	      this.digest();
-	    }.bind(this), 2000)
+	    }.bind( this ), 2000)
 	  },
 	
 	  digest: function() {
@@ -360,7 +360,7 @@
 	    setTimeout( function() {
 	      var plop = new Poop();
 	      this.waste.push( plop );
-	    }.bind( this) , 2000)
+	    }.bind( this ) , 2000)
 	  },
 	
 	  showPoop: function() {
@@ -445,12 +445,6 @@
 	      this.energy += 1
 	    }
 	  },
-	
-	
-	
-	
-	
-	
 	
 	}
 	
@@ -17226,6 +17220,26 @@
 		return module;
 	}
 
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	var Poop = function() {
+	  this.icon = "💩"
+	}
+	
+	module.exports = Poop;
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	var Food = function() {
+	  this.icon = "🍔"
+	}
+	
+	module.exports = Food;
 
 /***/ }
 /******/ ]);

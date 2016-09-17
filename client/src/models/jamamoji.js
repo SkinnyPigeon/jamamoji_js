@@ -1,6 +1,6 @@
 var _ = require( 'lodash' )
-// var Poop = require( './poop' )
-// var Food = require( './food' );
+var Poop = require( './poop' )
+var Food = require( './food' );
 
 var Jamamoji = function( name, icon ) {
   this.name = name;
@@ -31,7 +31,7 @@ Jamamoji.prototype = {
     var food = []
     for( var i = 0; i < this.food.length; i++ ) {
       console.log( "Hello" )
-      food.push(this.food[i].icon);
+      food.push( this.food[i].icon );
     }
     return food;
   },
@@ -39,7 +39,7 @@ Jamamoji.prototype = {
   hunger: function() {
     setTimeout( function() {
       this.digest();
-    }.bind(this), 2000)
+    }.bind( this ), 2000)
   },
 
   digest: function() {
@@ -51,7 +51,7 @@ Jamamoji.prototype = {
     setTimeout( function() {
       var plop = new Poop();
       this.waste.push( plop );
-    }.bind( this) , 2000)
+    }.bind( this ) , 2000)
   },
 
   showPoop: function() {
@@ -136,12 +136,6 @@ Jamamoji.prototype = {
       this.energy += 1
     }
   },
-
-
-
-
-
-
 
 }
 
