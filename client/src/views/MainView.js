@@ -23,13 +23,13 @@ MainView.prototype = {
       petPlace.appendChild( petIcon );
     }.bind( this ), 1 );
 
-    var foodIcon = document.createElement( 'h1' );
+    var foodIcon = document.createElement( 'h2' );
     setInterval( function() {
       foodIcon.innerText = this.pet.showFood();
       feedPlace.appendChild( foodIcon );
     }.bind( this ), 1 );
 
-    var poopIcon = document.createElement( 'h1' );
+    var poopIcon = document.createElement( 'h2' );
     setInterval( function() {
       poopIcon.innerText = this.pet.showPoop();
       poopPlace.appendChild( poopIcon );
