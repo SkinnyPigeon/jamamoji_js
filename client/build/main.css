@@ -24,6 +24,22 @@ h1.fightPlane {
   margin-left: 3.9em;
 }
 
+h1.hideFight {
+  display: none;
+}
+
+h1.showFight {
+  display: block;
+}
+
+button.showFight {
+  display: block;
+}
+
+button.hideFight {
+  display: none;
+}
+
 h1#pet.hidden {
   display: none;
 }

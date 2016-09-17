@@ -20,6 +20,7 @@ var FightView = function() {
   this.arena = arena;
   this.game = game;
   console.log( this.game );
+  this.icons = [];
   this.display();
 }
 
@@ -28,19 +29,47 @@ FightView.prototype = {
   display: function() {
     var fightPlace = document.getElementById( 'fight-place' );
     var fight = document.createElement( 'h1' );
-    fight.innerText = this.arena.state.join("");
+    fight.innerText = this.arena.showArena();
     fight.className = 'fightPlane';
+    this.icons.push( fight );
     fightPlace.appendChild( fight );
+    this.moveLeft();
+  },
 
+  moveLeft: function(){
+    var fightPlace = document.getElementById( 'fight-place' );
     var leftButton = document.createElement( 'button' );
     leftButton.innerText = "left";
+    this.icons.push( leftButton );
     leftButton.onclick = function() {
+      this.hide();
       var player = this.game.currentPlayer;
-      console.log( this.arena.state );
       player.moveLeft( player, this.arena.state );
+      this.show();
     }.bind( this );
     fightPlace.appendChild( leftButton );
   },
+
+  hide: function() {
+    for( var i = 0; i < this.icons.length; i++ ) {
+      this.icons[i].className = 'hideFight';
+    }
+  },
+
+  show: function() {
+    // for( var i = 0; i < this.icons.length; i++ ) {
+    //   this.icons[i].className = 'showFight';
+    // }
+    var fightPlace = document.getElementById( 'fight-place' );
+    var fight = document.createElement( 'h1' );
+    fight.innerText = this.arena.showArena();
+    fight.className = 'fightPlane';
+    fightPlace.appendChild( fight );
+    this.moveLeft();
+  },
+
+
+  
 
 }
 
