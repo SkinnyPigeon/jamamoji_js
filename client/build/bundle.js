@@ -17610,13 +17610,13 @@
 	  checkLeft: function( guy1, arena ) {
 	    var check = guy1.position;
 	    check -= 1;
-	    arena[ check ].contains( "_" );
+	    arena[ check ] === "_";
 	  },
 	
 	  checkRight: function( guy1, arena ) {
 	    var check = guy1.position;
 	    check += 1;
-	    arena[ check ].contains( "_" );
+	    arena[ check ] === "_";
 	  },
 	
 	  move: function( spaces ) {
@@ -17624,7 +17624,7 @@
 	  },
 	
 	  moveEnergy: function( bars ) {
-	    this.jamamoji.energy -= bars;
+	    this.energy -= bars;
 	  },
 	
 	  moveRight: function( guy, arena ) {
