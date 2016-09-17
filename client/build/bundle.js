@@ -17376,6 +17376,25 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var SignOutView = __webpack_require__( 4 );
+	var FightView = __webpack_require__( 11 );
+	
+	var Jamamoji = __webpack_require__( 5 );
+	var BattleJamamoji = __webpack_require__( 12 );
+	var Arena = __webpack_require__( 13 );
+	var Game = __webpack_require__( 14 );
+	
+	var j1 = new Jamamoji( "jeff", "🤓" );
+	j1.position = 3;
+	var j2 = new Jamamoji( "dave", "😀" );
+	j2.position = 6;
+	
+	var b1 = new BattleJamamoji( j1 );
+	var b2 = new BattleJamamoji( j2 );
+	var players = [ b1, b2 ];
+	var arena = new Arena();
+	var game = new Game( players, arena );
+	arena.spawnPlayers( b1, b2 );
+	game.randomStart();
 	
 	var MainView = function( pet ) {
 	  this.pet = pet;
@@ -17392,6 +17411,7 @@
 	    var cleanPoop = document.getElementById( 'clean-poop' );
 	    var feedPlace = document.getElementById( 'feed-place' );
 	    var medicinePlace = document.getElementById( 'give-medicine' );
+	    var fightPlace = document.getElementById( 'have-fight' );
 	    var petPlace = document.getElementById( 'pet-place' );
 	    var poopPlace = document.getElementById( 'poop-place' );
 	    var giveFood = document.getElementById( 'give-food' );
@@ -17434,6 +17454,12 @@
 	      this.pet.cure();
 	    }.bind( this );
 	    medicinePlace.appendChild( cureButton );
+	
+	    var fightButton = document.createElement( 'button' );
+	    fightButton.onclick = function() {
+	      this.haveFight();
+	    }.bind( this );
+	    fightPlace.appendChild( fightButton );
 	  },
 	
 	  displaySignOut: function( pet ) {
@@ -17441,11 +17467,332 @@
 	    view.display();
 	  },
 	
+	  haveFight: function() {
+	    var fight = new FightView( arena, game );
+	  }
+	
 	
 	}
 	
 	
 	module.exports = MainView;
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	// var Jamamoji = require( '../models/jamamoji' );
+	// var BattleJamamoji = require( '../models/battleJamamoji' );
+	// var Arena = require( '../models/arena' );
+	// var Game = require( '../models/game' );
+	
+	// var j1 = new Jamamoji( "jeff", "🤓" );
+	// j1.position = 3;
+	// var j2 = new Jamamoji( "dave", "😀" );
+	// j2.position = 6;
+	
+	// var b1 = new BattleJamamoji( j1 );
+	// var b2 = new BattleJamamoji( j2 );
+	// var players = [ b1, b2 ];
+	// var arena = new Arena();
+	// var game = new Game( players, arena );
+	// arena.spawnPlayers( b1, b2 );
+	// game.randomStart();
+	
+	
+	var FightView = function( arena, game ) {
+	  this.arena = arena;
+	  this.game = game;
+	console.log( this.game );
+	
+	}
+	
+	module.exports = FightView;
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+	var BattleJamamoji = function( jamamoji ) {
+	  this.name = jamamoji.name;
+	  this.icon = jamamoji.icon;
+	  this.health = jamamoji.health;
+	  this.energy = jamamoji.energy;
+	  this.position = jamamoji.position;
+	  this.opponentBonus = jamamoji.opponentBonus;
+	  this.block = jamamoji.block;
+	  this.originalBlock = jamamoji.block;
+	  this.opponentSpecial = jamamoji.opponentSpecial;
+	}
+	
+	BattleJamamoji.prototype = {
+	
+	  checkLeft: function( guy1, arena ) {
+	    var check = guy1.position;
+	    check -= 1;
+	    arena[ check ].contains( "_" );
+	  },
+	
+	  checkRight: function( guy1, arena ) {
+	    var check = guy1.position;
+	    check += 1;
+	    arena[ check ].contains( "_" );
+	  },
+	
+	  move: function( spaces ) {
+	    this.position += spaces;
+	  },
+	
+	  moveEnergy: function( bars ) {
+	    this.jamamoji.energy -= bars;
+	  },
+	
+	  moveRight: function( guy, arena ) {
+	    if( guy.checkRight( guy, arena ) === false ) {
+	      return;
+	    } else if( this.energy <= 0 ) {
+	      return;
+	    } else {
+	      arena.splice( guy.position, 1 );
+	      guy.move( 1 );
+	      guy.moveEnergy( 1 );
+	      arena.splice( guy.position, 0, guy.icon );
+	    }
+	  },
+	
+	  dashRight: function( guy, arena, game ) {
+	    if( guy.checkRight( guy, arena ) && guy.special_check_right( guy, arena )) {
+	      return;
+	    } else if( this.energy <= 0 ) {
+	      return
+	    } else {
+	      arena.splice( guy.position, 1 );
+	      guy.move( 2 );
+	      guy.moveEnergy( 1 );
+	      arena.splice( guy.position, 0, guy.icon );
+	      guy.endTurn( game );
+	    }
+	  },
+	
+	  moveLeft: function( guy, arena ) {
+	    if( guy.checkRight( guy, arena ) === false ) {
+	      return;
+	    } else if( this.energy <= 0 ) {
+	      return;
+	    } else {
+	      arena.splice( guy.position, 1 );
+	      guy.move( -1 );
+	      guy.moveEnergy( 1 );
+	      arena.splice( guy.position, 0, guy.icon );
+	    }
+	  },
+	
+	  dashLeft: function( guy, arena, game ) {
+	    if( guy.checkRight( guy, arena ) && guy.special_check_right( guy, arena )) {
+	      return;
+	    } else if( this.energy <= 0 ) {
+	      return
+	    } else {
+	      arena.splice( guy.position, 1 );
+	      guy.move( -2 );
+	      guy.moveEnergy( 1 );
+	      arena.splice( guy.position, 0, guy.icon );
+	      guy.endTurn( game );
+	    }
+	  },
+	
+	  block: function( guy1 ) {
+	    if( this.energy <= 0 ) {
+	      return;
+	    } else {
+	      this.block += 2;
+	      guy1.moveEnergy( 1 );
+	    }
+	  },
+	
+	  punchSetup: function( units ) {
+	    this.block -= units;
+	    if( this.block < 0 ) {
+	      this.health += this.block;
+	    }
+	    this.block = this.originalBlock;
+	  },
+	
+	  punch: function( guy1, guy2, arena ) {
+	    if( guy1.checkLeft( guy1, arena ) && guy1.checkRight( guy1, arena )) {
+	      return; 
+	    } else if( this.energy <= 0 ) {
+	      return;
+	    } else {
+	      guy2.punchSetup( 1 );
+	      guy1.moveEnergy( 1 );
+	    }
+	  },
+	
+	  chanceOfBonusKickDamage: function() {
+	    var chance = Math.random * ( 20 - 1 ) + 1;
+	    if( chance > 19 ) {
+	      return this.opponentBonus = 3;
+	    } else if( chance > 7 ) {
+	      return this.opponent_bonus = 2;
+	    } else {
+	      return this.opponent_bonus = 1;
+	    }
+	  },
+	
+	  kickSetup: function() {
+	    this.block -= this.opponentBonus;
+	    if( this.block < 0 ) {
+	      this.health += this.block;
+	    }
+	    this.block = this.originalBlock;
+	  },
+	
+	  kick: function( guy1, guy2, arena ) {
+	    if( guy1.checkLeft( guy1, arena ) && guy1.checkRight( guy1, arena ) ) {
+	      return;
+	    } else if( this.energy <= 1 ) {
+	      return;
+	    } else {
+	      guy2.chanceOfBonusKickDamage();
+	      guy2.kickSetup();
+	      guy1.moveEnergy( 2 );
+	      this.opponentBonus = 0;
+	    }
+	  },
+	
+	  specialCheckLeft: function( guy1, arena ) {
+	    var check = guy1.position;
+	    check -= 2;
+	    arena[ check ].contains( "_" );
+	  },
+	
+	  specialCheckRight: function( guy1, arena ) {
+	    var check = guy1.position;
+	    check += 2;
+	    arena[ check ].contains( "_" );
+	  },
+	
+	  specialSetup: function() {
+	    this.block -= this.opponentSpecial;
+	    if( this.block < 0 ) {
+	      this.health += this.block;
+	    }
+	    this.opponentSpecial = 0;
+	    this.block = this.originalBlock;
+	  },
+	
+	  special: function( guy1, guy2, arena ) {
+	    if( guy1.specialCheckLeft( guy1, arena ) && guy1.specialCheckLeft( guy1, arena ) 
+	      && guy1.checkLeft( guy1, arena ) && guy1.checkRight( guy1, arena )) {
+	      return;
+	    } else if( guy2.opponentSpecial === 0 ) {
+	      return;
+	    } else if( this.energy <= 2 ) {
+	      return;
+	    } else {
+	      guy2.specialSetup();
+	      guy1.moveEnergy( 3 );
+	    }
+	  },
+	
+	  endTurn: function( game ) {
+	    game.endTurn();
+	  },
+	
+	  addEnergy1: function() {
+	    this.energy += 1;
+	  },
+	
+	  addEnergy2: function() {
+	    this.energy += 2;
+	  }
+	
+	}
+	
+	module.exports = BattleJamamoji;
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var _ = __webpack_require__( 6 );
+	
+	var Arena = function() {
+	  this.state = _.fill( Array(8), '_' );
+	}
+	
+	Arena.prototype = {
+	
+	  spawnPlayers: function( guy1, guy2 ) {
+	    this.state.splice( guy1.position, guy1.icon );
+	    this.state.splice( guy2.position, guy2.icon );
+	  },
+	
+	  showArena: function() {
+	    var arena = []
+	    for( var i = 0; i < this.state.length; i++ ) {
+	      arena.push( this.food[i].icon );
+	    }
+	    return arena.join("");
+	  },
+	
+	}
+	
+	module.exports = Arena;
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var _ = __webpack_require__( 6 );
+	
+	var Game = function( players, arena ) {
+	  this.players = players;
+	  this.arena = arena;
+	  this.currentPlayer = players[0];
+	  this.otherPlayer = players[1];
+	}
+	
+	Game.prototype = {
+	
+	  randomStart: function() {
+	    var chance = Math.random( 20 - 1 ) + 1;
+	    if( chance > 10 ) {
+	      this.arena = _.reverse( this.players );
+	      this.currentPlayer = this.players[0];
+	    }
+	  },
+	
+	  endTurn: function() {
+	    this.arena = _.reverse( this.players );
+	    this.currentPlayer = this.players[0];
+	    this.otherPlayer = this.players[1];
+	    this.currentPlayer.block = this.currentPlayer.originalBlock;
+	    if( this.currentPlayer.energy >= 3 ) {
+	      return;
+	    } else if( this.currentPlayer.energy === 2 ) {
+	      this.currentPlayer.addEnergy1();
+	      return;
+	    } else if ( this.currentPlayer.energy <= 1 ) {
+	      this.currentPlayer.addEnergy2();
+	      return;
+	    }
+	  },
+	
+	  win: function() {
+	    if( this.otherPlayer.health <= 0 ) {
+	      return true;
+	    }
+	  },
+	
+	  updateStats: function() {
+	    return this.currentPlayer.health && this.otherPlayer.energy;
+	  }
+	
+	}
+	
+	module.exports = Game;
 
 /***/ }
 /******/ ]);
