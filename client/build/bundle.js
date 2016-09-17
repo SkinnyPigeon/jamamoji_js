@@ -144,6 +144,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var Jamamoji = __webpack_require__( 5 );
+	var MainView = __webpack_require__( 10 );
 	
 	var JamamojiView = function( user ) {
 	  this.url = "http://localhost:5000/api/jamamojis";
@@ -192,11 +193,17 @@
 	
 	  fillPet: function( newPet, storedPet ) {
 	    for( var i = 0; i  < storedPet.food; i++ ) {
-	      newPet.eat();
+	      newPet.eatAtStartUp();
 	    }
 	    for( var i = 0; i < storedPet.waste; i++ ) {
 	      newPet.poop();
 	    }
+	    this.mainView( newPet );
+	  },
+	
+	  mainView: function( pet ) {
+	    var view = new MainView( pet );
+	    view.display();
 	  },
 	}
 	
@@ -330,6 +337,12 @@
 	}
 	
 	Jamamoji.prototype = {
+	
+	  eatAtStartUp: function() {
+	    var burger = new Food();
+	    this.food.push( burger );
+	  },
+	
 	  eat: function() {
 	    var burger = new Food();
 	    this.food.push( burger );
@@ -17240,6 +17253,12 @@
 	}
 	
 	module.exports = Food;
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+
 
 /***/ }
 /******/ ]);

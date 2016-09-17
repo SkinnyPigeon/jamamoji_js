@@ -1,4 +1,5 @@
 var Jamamoji = require( '../models/jamamoji' );
+var MainView = require( './MainView' );
 
 var JamamojiView = function( user ) {
   this.url = "http://localhost:5000/api/jamamojis";
@@ -47,11 +48,17 @@ JamamojiView.prototype = {
 
   fillPet: function( newPet, storedPet ) {
     for( var i = 0; i  < storedPet.food; i++ ) {
-      newPet.eat();
+      newPet.eatAtStartUp();
     }
     for( var i = 0; i < storedPet.waste; i++ ) {
       newPet.poop();
     }
+    this.mainView( newPet );
+  },
+
+  mainView: function( pet ) {
+    var view = new MainView( pet );
+    view.display();
   },
 }
 

@@ -21,6 +21,12 @@ var Jamamoji = function( name, icon ) {
 }
 
 Jamamoji.prototype = {
+
+  eatAtStartUp: function() {
+    var burger = new Food();
+    this.food.push( burger );
+  },
+
   eat: function() {
     var burger = new Food();
     this.food.push( burger );
