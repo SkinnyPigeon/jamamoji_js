@@ -20,6 +20,28 @@ var FightView = function() {
   this.arena = arena;
   this.game = game;
   console.log( this.game );
+  this.display();
+}
+
+FightView.prototype = {
+
+  display: function() {
+    var fightPlace = document.getElementById( 'fight-place' );
+    var fight = document.createElement( 'h1' );
+    fight.innerText = this.arena.state.join("");
+    fight.className = 'fightPlane';
+    fightPlace.appendChild( fight );
+
+    var leftButton = document.createElement( 'button' );
+    leftButton.innerText = "left";
+    leftButton.onclick = function() {
+      var player = this.game.currentPlayer;
+      console.log( this.arena.state );
+      player.moveLeft( player, this.arena.state );
+    }.bind( this );
+    fightPlace.appendChild( leftButton );
+  },
+
 }
 
 

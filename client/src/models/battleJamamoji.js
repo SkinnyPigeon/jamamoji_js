@@ -46,7 +46,7 @@ BattleJamamoji.prototype = {
   },
 
   dashRight: function( guy, arena, game ) {
-    if( guy.checkRight( guy, arena ) && guy.special_check_right( guy, arena )) {
+    if( guy.checkRight( guy, arena ) && guy.specialCheckRight( guy, arena )) {
       return;
     } else if( this.energy <= 0 ) {
       return
@@ -60,7 +60,7 @@ BattleJamamoji.prototype = {
   },
 
   moveLeft: function( guy, arena ) {
-    if( guy.checkRight( guy, arena ) === false ) {
+    if( guy.checkLeft( guy, arena ) === false ) {
       return;
     } else if( this.energy <= 0 ) {
       return;
@@ -73,7 +73,7 @@ BattleJamamoji.prototype = {
   },
 
   dashLeft: function( guy, arena, game ) {
-    if( guy.checkRight( guy, arena ) && guy.special_check_right( guy, arena )) {
+    if( guy.checkLeft( guy, arena ) && guy.specialCheckLeft( guy, arena )) {
       return;
     } else if( this.energy <= 0 ) {
       return

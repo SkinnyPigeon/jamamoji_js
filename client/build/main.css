@@ -14,6 +14,16 @@ h1#pet.aliveAndWell {
   -webkit-animation: rightThenLeft 15s infinite;
 }
 
+h1.fightPlane {
+  font-size: 7vw;
+  bottom: 0.01em;
+  position: absolute;
+  margin: auto;
+  margin-bottom: 0;
+  display: block;
+  margin-left: 3.9em;
+}
+
 h1#pet.hidden {
   display: none;
 }

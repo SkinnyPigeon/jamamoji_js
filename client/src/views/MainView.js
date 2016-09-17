@@ -95,21 +95,23 @@ MainView.prototype = {
     view.display();
   },
 
-  haveFight: function( pet, icons ) {
+  haveFight: function( pet ) {
     pet.pause();
     var fight = new FightView();
     console.log( this.icons );
     this.hide( this.icons );
   },
 
-  hide: function( icons ) {
-    for( var i = 0; i < icons.length; i++ ) {
-      icons[i].className = 'hidden';
+  hide: function() {
+    for( var i = 0; i < this.icons.length; i++ ) {
+      this.icons[i].className = 'hidden';
     }
   },
 
   show: function() {
-
+    this.icons[0].className = 'aliveAndWell';
+    this.icons[1].className = 'icons';
+    this.icons[2].className = 'icons';
   },
 
 

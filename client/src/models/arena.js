@@ -7,14 +7,14 @@ var Arena = function() {
 Arena.prototype = {
 
   spawnPlayers: function( guy1, guy2 ) {
-    this.state.splice( guy1.position, guy1.icon );
-    this.state.splice( guy2.position, guy2.icon );
+    this.state.splice( guy1.position, 0, guy1.icon );
+    this.state.splice( guy2.position, 0, guy2.icon );
   },
 
   showArena: function() {
     var arena = []
     for( var i = 0; i < this.state.length; i++ ) {
-      arena.push( this.food[i].icon );
+      arena.push( this.state[i] );
     }
     return arena.join("");
   },

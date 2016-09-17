@@ -17510,21 +17510,23 @@
 	    view.display();
 	  },
 	
-	  haveFight: function( pet, icons ) {
+	  haveFight: function( pet ) {
 	    pet.pause();
 	    var fight = new FightView();
 	    console.log( this.icons );
 	    this.hide( this.icons );
 	  },
 	
-	  hide: function( icons ) {
-	    for( var i = 0; i < icons.length; i++ ) {
-	      icons[i].className = 'hidden';
+	  hide: function() {
+	    for( var i = 0; i < this.icons.length; i++ ) {
+	      this.icons[i].className = 'hidden';
 	    }
 	  },
 	
 	  show: function() {
-	
+	    this.icons[0].className = 'aliveAndWell';
+	    this.icons[1].className = 'icons';
+	    this.icons[2].className = 'icons';
 	  },
 	
 	
@@ -17559,6 +17561,28 @@
 	  this.arena = arena;
 	  this.game = game;
 	  console.log( this.game );
+	  this.display();
+	}
+	
+	FightView.prototype = {
+	
+	  display: function() {
+	    var fightPlace = document.getElementById( 'fight-place' );
+	    var fight = document.createElement( 'h1' );
+	    fight.innerText = this.arena.state.join("");
+	    fight.className = 'fightPlane';
+	    fightPlace.appendChild( fight );
+	
+	    var leftButton = document.createElement( 'button' );
+	    leftButton.innerText = "left";
+	    leftButton.onclick = function() {
+	      var player = this.game.currentPlayer;
+	      console.log( this.arena.state );
+	      player.moveLeft( player, this.arena.state );
+	    }.bind( this );
+	    fightPlace.appendChild( leftButton );
+	  },
+	
 	}
 	
 	
@@ -17617,7 +17641,7 @@
 	  },
 	
 	  dashRight: function( guy, arena, game ) {
-	    if( guy.checkRight( guy, arena ) && guy.special_check_right( guy, arena )) {
+	    if( guy.checkRight( guy, arena ) && guy.specialCheckRight( guy, arena )) {
 	      return;
 	    } else if( this.energy <= 0 ) {
 	      return
@@ -17631,7 +17655,7 @@
 	  },
 	
 	  moveLeft: function( guy, arena ) {
-	    if( guy.checkRight( guy, arena ) === false ) {
+	    if( guy.checkLeft( guy, arena ) === false ) {
 	      return;
 	    } else if( this.energy <= 0 ) {
 	      return;
@@ -17644,7 +17668,7 @@
 	  },
 	
 	  dashLeft: function( guy, arena, game ) {
-	    if( guy.checkRight( guy, arena ) && guy.special_check_right( guy, arena )) {
+	    if( guy.checkLeft( guy, arena ) && guy.specialCheckLeft( guy, arena )) {
 	      return;
 	    } else if( this.energy <= 0 ) {
 	      return
@@ -17781,14 +17805,14 @@
 	Arena.prototype = {
 	
 	  spawnPlayers: function( guy1, guy2 ) {
-	    this.state.splice( guy1.position, guy1.icon );
-	    this.state.splice( guy2.position, guy2.icon );
+	    this.state.splice( guy1.position, 0, guy1.icon );
+	    this.state.splice( guy2.position, 0, guy2.icon );
 	  },
 	
 	  showArena: function() {
 	    var arena = []
 	    for( var i = 0; i < this.state.length; i++ ) {
-	      arena.push( this.food[i].icon );
+	      arena.push( this.state[i] );
 	    }
 	    return arena.join("");
 	  },
