@@ -30,7 +30,9 @@ Jamamoji.prototype = {
   eat: function() {
     var burger = new Food();
     this.food.push( burger );
-    this.hunger();
+    for( var i = 0; i < this.food.length; i++ ) {
+      this.hunger();
+    }
   },
 
   showFood: function() {
@@ -38,18 +40,24 @@ Jamamoji.prototype = {
     for( var i = 0; i < this.food.length; i++ ) {
       food.push( this.food[i].icon );
     }
-    return food;
+    return food.join("");
   },
   
   hunger: function() {
     setInterval( function() {
       this.digest();
-    }.bind( this ), 2000)
+    }.bind( this ), 5000)
   },
 
   digest: function() {
+    console.log( this.food.length );
+    if( this.food.length > 0 ) {
       this.food.pop()
       this.poop()
+    }
+    if( this.food.length === 0 ) {
+      this.emptyPoop();
+    }
   },
 
   poop: function() {
@@ -59,12 +67,19 @@ Jamamoji.prototype = {
     }.bind( this ) , 2000)
   },
 
+  emptyPoop: function() {
+    setTimeout( function() {
+      var plop = new Poop();
+      this.waste.push( plop );
+    }.bind( this ) , 10000)
+  },
+
   showPoop: function() {
     var poops = []
     for( var i = 0; i < this.waste.length; i++ ) {
       poops.push(this.waste[i].icon);
     }
-    return poops;
+    return poops.join("");
   },
 
   cleanPoop: function() {
