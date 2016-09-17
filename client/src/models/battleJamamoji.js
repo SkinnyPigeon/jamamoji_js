@@ -50,7 +50,8 @@ BattleJamamoji.prototype = {
   },
 
   dashRight: function( guy, arena, game ) {
-    if( guy.checkRight( guy, arena ) && guy.specialCheckRight( guy, arena )) {
+    if( guy.checkRight( guy, arena ) === false
+      || guy.specialCheckRight( guy, arena ) === false ) {
       return;
     } else if( this.energy <= 0 ) {
       return
@@ -77,7 +78,8 @@ BattleJamamoji.prototype = {
   },
 
   dashLeft: function( guy, arena, game ) {
-    if( guy.checkLeft( guy, arena ) && guy.specialCheckLeft( guy, arena )) {
+    if( guy.checkLeft( guy, arena ) === false 
+      || guy.specialCheckLeft( guy, arena ) === false) {
       return;
     } else if( this.energy <= 0 ) {
       return

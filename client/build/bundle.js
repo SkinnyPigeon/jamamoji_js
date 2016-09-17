@@ -17578,6 +17578,8 @@
 	    this.moveRight();
 	    this.punch();
 	    this.kick();
+	    this.dashLeft();
+	    this.dashRight();
 	  },
 	
 	  moveLeft: function(){
@@ -17628,6 +17630,30 @@
 	      this.display();
 	    }.bind( this );
 	    fightPlace.appendChild( kickButton );
+	  },
+	
+	  dashLeft: function(){
+	    var fightPlace = document.getElementById( 'fight-place' );
+	    var dashLeftButton = document.createElement( 'button' );
+	    dashLeftButton.innerText = "left";
+	    dashLeftButton.onclick = function() {
+	      var player = this.game.currentPlayer;
+	      player.dashLeft( player, this.arena.state, this.game );
+	      this.display();
+	    }.bind( this );
+	    fightPlace.appendChild( dashLeftButton );
+	  },
+	
+	  dashRight: function() {
+	    var fightPlace = document.getElementById( 'fight-place' );
+	    var dashRightButton = document.createElement( 'button' );
+	    dashRightButton.innerText = "right";
+	    dashRightButton.onclick = function() {
+	      var player = this.game.currentPlayer;
+	      player.dashRight( player, this.arena.state, this.game );
+	      this.display();
+	    }.bind( this );
+	    fightPlace.appendChild( dashRightButton );
 	  },
 	
 	  resetView: function() {
@@ -17694,7 +17720,8 @@
 	  },
 	
 	  dashRight: function( guy, arena, game ) {
-	    if( guy.checkRight( guy, arena ) && guy.specialCheckRight( guy, arena )) {
+	    if( guy.checkRight( guy, arena ) === false
+	      || guy.specialCheckRight( guy, arena ) === false ) {
 	      return;
 	    } else if( this.energy <= 0 ) {
 	      return
@@ -17721,7 +17748,8 @@
 	  },
 	
 	  dashLeft: function( guy, arena, game ) {
-	    if( guy.checkLeft( guy, arena ) && guy.specialCheckLeft( guy, arena )) {
+	    if( guy.checkLeft( guy, arena ) === false 
+	      || guy.specialCheckLeft( guy, arena ) === false) {
 	      return;
 	    } else if( this.energy <= 0 ) {
 	      return

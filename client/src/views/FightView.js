@@ -37,6 +37,8 @@ FightView.prototype = {
     this.moveRight();
     this.punch();
     this.kick();
+    this.dashLeft();
+    this.dashRight();
   },
 
   moveLeft: function(){
@@ -87,6 +89,30 @@ FightView.prototype = {
       this.display();
     }.bind( this );
     fightPlace.appendChild( kickButton );
+  },
+
+  dashLeft: function(){
+    var fightPlace = document.getElementById( 'fight-place' );
+    var dashLeftButton = document.createElement( 'button' );
+    dashLeftButton.innerText = "left";
+    dashLeftButton.onclick = function() {
+      var player = this.game.currentPlayer;
+      player.dashLeft( player, this.arena.state, this.game );
+      this.display();
+    }.bind( this );
+    fightPlace.appendChild( dashLeftButton );
+  },
+
+  dashRight: function() {
+    var fightPlace = document.getElementById( 'fight-place' );
+    var dashRightButton = document.createElement( 'button' );
+    dashRightButton.innerText = "right";
+    dashRightButton.onclick = function() {
+      var player = this.game.currentPlayer;
+      player.dashRight( player, this.arena.state, this.game );
+      this.display();
+    }.bind( this );
+    fightPlace.appendChild( dashRightButton );
   },
 
   resetView: function() {
