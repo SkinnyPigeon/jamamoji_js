@@ -16,8 +16,9 @@ MainView.prototype = {
     var giveFood = document.getElementById( 'give-food' );
 
     var petIcon = document.createElement( 'h1' );
-    
-    console.log( this.pet )
+    petIcon.id = 'pet';
+    petIcon.className = 'aliveAndWell';
+
     setInterval( function() {
       petIcon.innerText = this.pet.icon;
       petPlace.appendChild( petIcon );

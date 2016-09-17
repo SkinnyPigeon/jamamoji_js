@@ -34,6 +34,8 @@ Jamamoji.prototype = {
     if( this.food.length >= 8 ) {
       this.icon = "☠️";
       this.alive = false;
+      var pet = this.getPet();
+      pet.className = 'dead';
     }
     var burger = new Food();
     this.food.push( burger );
@@ -113,6 +115,8 @@ Jamamoji.prototype = {
           this.waste.length >= 5 ) {
         this.alive = false;
         this.icon = "☠️"
+        var pet = this.getPet();
+        pet.className = 'dead';
       }
     }.bind( this ), 1 );
   },
@@ -125,6 +129,8 @@ Jamamoji.prototype = {
       if( this.waste.length >= 3 ) {
         this.ill = true;
         this.icon = "😷";
+        var pet = this.getPet();
+        pet.className = 'ill';
       }
     }.bind( this ), 1 );
   },
@@ -138,7 +144,11 @@ Jamamoji.prototype = {
           this.food.length <= 4 ) {
         this.happy = true
         this.icon = "😀"
+        var pet = this.getPet();
+        pet.className = 'aliveAndWell'
       } else {
+        var pet = this.getPet();
+        pet.className = 'bored'
         this.icon = "😒"
       }
     }.bind( this ), 1 );
@@ -181,12 +191,19 @@ Jamamoji.prototype = {
     }
     this.sick = false;
     this.icon = "😒";
+    var pet = this.getPet();
+    pet.className = 'bored';
   },
 
   checkDead: function() {
     if( this.icon === "☠️" ) {
       return true;
     }
+  },
+
+  getPet: function() {
+    var pet = document.getElementById( 'pet' );
+    return pet;
   },
 
 }
