@@ -17580,6 +17580,9 @@
 	    this.kick();
 	    this.dashLeft();
 	    this.dashRight();
+	    this.special();
+	    this.block();
+	    this.endTurn();
 	  },
 	
 	  moveLeft: function(){
@@ -17635,7 +17638,7 @@
 	  dashLeft: function(){
 	    var fightPlace = document.getElementById( 'fight-place' );
 	    var dashLeftButton = document.createElement( 'button' );
-	    dashLeftButton.innerText = "left";
+	    dashLeftButton.innerText = "dashLeft";
 	    dashLeftButton.onclick = function() {
 	      var player = this.game.currentPlayer;
 	      player.dashLeft( player, this.arena.state, this.game );
@@ -17647,13 +17650,51 @@
 	  dashRight: function() {
 	    var fightPlace = document.getElementById( 'fight-place' );
 	    var dashRightButton = document.createElement( 'button' );
-	    dashRightButton.innerText = "right";
+	    dashRightButton.innerText = "dashRight";
 	    dashRightButton.onclick = function() {
 	      var player = this.game.currentPlayer;
 	      player.dashRight( player, this.arena.state, this.game );
 	      this.display();
 	    }.bind( this );
 	    fightPlace.appendChild( dashRightButton );
+	  },
+	
+	  special: function() {
+	    var fightPlace = document.getElementById( 'fight-place' );
+	    var specialButton = document.createElement( 'button' );
+	    specialButton.innerText = "special";
+	    specialButton.onclick = function() {
+	      var currentPlayer = this.game.currentPlayer;
+	      var otherPlayer = this.game.otherPlayer;
+	      currentPlayer.special( currentPlayer, otherPlayer, this.arena.state );
+	      this.display();
+	    }.bind( this );
+	    fightPlace.appendChild( specialButton );
+	  },
+	
+	  block: function() {
+	    var fightPlace = document.getElementById( 'fight-place' );
+	    var blockButton = document.createElement( 'button' );
+	    blockButton.innerText = "block";
+	    blockButton.onclick = function() {
+	      var currentPlayer = this.game.currentPlayer;
+	      currentPlayer.blockHit( currentPlayer );
+	      this.display();
+	    }.bind( this );
+	    fightPlace.appendChild( blockButton );
+	  },
+	
+	  endTurn: function() {
+	    var fightPlace = document.getElementById( 'fight-place' );
+	    var endTurnButton = document.createElement( 'button' );
+	    endTurnButton.innerText = "endTurn";
+	    endTurnButton.onclick = function() {
+	      var currentPlayer = this.game.currentPlayer;
+	      var otherPlayer = this.game.otherPlayer;
+	      currentPlayer.endTurn( this.game );
+	      this.display();
+	    }.bind( this );
+	    fightPlace.appendChild( endTurnButton );
 	  },
 	
 	  resetView: function() {
@@ -17762,7 +17803,7 @@
 	    }
 	  },
 	
-	  block: function( guy1 ) {
+	  blockHit: function( guy1 ) {
 	    if( this.energy <= 0 ) {
 	      return;
 	    } else {

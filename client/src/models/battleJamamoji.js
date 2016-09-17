@@ -92,7 +92,7 @@ BattleJamamoji.prototype = {
     }
   },
 
-  block: function( guy1 ) {
+  blockHit: function( guy1 ) {
     if( this.energy <= 0 ) {
       return;
     } else {
