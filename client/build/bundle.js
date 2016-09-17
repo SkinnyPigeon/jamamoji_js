@@ -141,8 +141,10 @@
 
 /***/ },
 /* 2 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
+	var Jamamoji = __webpack_require__( !(function webpackMissingModule() { var e = new Error("Cannot find module \"../models/jamamoji\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()) );
+	
 	var JamamojiView = function( user ) {
 	  this.url = "http://localhost:5000/api/jamamojis";
 	  this.user = user;
@@ -167,10 +169,15 @@
 	  pickJamamoji: function( jamamojis ) {
 	    for( var i = 0; i < jamamojis.length; i++ ) {
 	      if( jamamojis[i].user_id === this.user.id ) {
-	        // this.makeJamamoji( jamamojis[i] );
+	        this.makeJamamoji( jamamojis[i] );
 	        console.log( jamamojis[i] );
 	      }
 	    }
+	  },
+	
+	  makeJamamoji: function( jamamoji ) {
+	    var pet = new Jamamoji( jamamoji.name, jamamoji.icon );
+	    console.log( pet );
 	  },
 	}
 	
