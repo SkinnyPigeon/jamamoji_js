@@ -19,8 +19,6 @@ var FightView = function() {
 
   this.arena = arena;
   this.game = game;
-  console.log( this.game );
-  this.icons = [];
   this.display();
 }
 
@@ -28,26 +26,50 @@ FightView.prototype = {
 
   display: function() {
     this.resetView();
+    console.log( this.game );
     var fightPlace = document.getElementById( 'fight-place' );
     var fight = document.createElement( 'h1' );
     fight.innerText = this.arena.showArena();
     fight.className = 'fightPlane';
-    this.icons.push( fight );
     fightPlace.appendChild( fight );
     this.moveLeft();
+    this.moveRight();
   },
 
   moveLeft: function(){
     var fightPlace = document.getElementById( 'fight-place' );
     var leftButton = document.createElement( 'button' );
     leftButton.innerText = "left";
-    this.icons.push( leftButton );
     leftButton.onclick = function() {
       var player = this.game.currentPlayer;
       player.moveLeft( player, this.arena.state );
       this.display();
     }.bind( this );
     fightPlace.appendChild( leftButton );
+  },
+
+  moveRight: function() {
+    var fightPlace = document.getElementById( 'fight-place' );
+    var rightButton = document.createElement( 'button' );
+    rightButton.innerText = "right";
+    rightButton.onclick = function() {
+      var player = this.game.currentPlayer;
+      player.moveRight( player, this.arena.state );
+      this.display();
+    }.bind( this );
+    fightPlace.appendChild( rightButton );
+  },
+
+  punch: function() {
+    var fightPlace = document.getElementById( 'fight-place' );
+    var punchButton = document.createElement( 'button' );
+    punchButton.innerText = "right";
+    punchButton.onclick = function() {
+      var player = this.game.currentPlayer;
+      player.moveRight( player, this.arena.state );
+      this.display();
+    }.bind( this );
+    fightPlace.appendChild( punchButton );
   },
 
   resetView: function() {

@@ -15,13 +15,17 @@ BattleJamamoji.prototype = {
   checkLeft: function( guy1, arena ) {
     var check = guy1.position;
     check -= 1;
-    arena[ check ] === "_";
+    if( arena[ check ] !== "_" ) {
+      return false;
+    }
   },
 
   checkRight: function( guy1, arena ) {
     var check = guy1.position;
     check += 1;
-    arena[ check ] === "_";
+    if( arena[ check ] !== "_" ) {
+      return false;
+    }
   },
 
   move: function( spaces ) {
@@ -149,13 +153,17 @@ BattleJamamoji.prototype = {
   specialCheckLeft: function( guy1, arena ) {
     var check = guy1.position;
     check -= 2;
-    arena[ check ].contains( "_" );
+    if( arena[ check ] !== "_" ) {
+      return false;
+    }
   },
 
   specialCheckRight: function( guy1, arena ) {
     var check = guy1.position;
     check += 2;
-    arena[ check ].contains( "_" );
+    if( arena[ check ] !== "_" ) {
+      return false;
+    }
   },
 
   specialSetup: function() {
