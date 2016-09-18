@@ -193,7 +193,7 @@
 	      newPet.eatAtStartUp();
 	    }
 	    for( var i = 0; i < storedPet.waste; i++ ) {
-	      newPet.poop();
+	      newPet.poopAtStart();
 	    }
 	    this.mainView( newPet );
 	  },
@@ -403,7 +403,8 @@
 	  },
 	
 	  poopAtStart: function() {
-	    this.showPoop();
+	    var poop = new Poop();
+	    this.waste.push( poop );
 	  },
 	
 	  eat: function() {
@@ -17411,7 +17412,7 @@
 	  this.pet.hunger();
 	  this.pet.sick();
 	  this.pet.dead();
-	  this.pet.poopAtStart();
+	  this.pet.showPoop();
 	  this.pet.setMood();
 	  this.pet.countHappiness();
 	  this.displaySignOut( this.pet );

@@ -52,7 +52,7 @@ JamamojiView.prototype = {
       newPet.eatAtStartUp();
     }
     for( var i = 0; i < storedPet.waste; i++ ) {
-      newPet.poop();
+      newPet.poopAtStart();
     }
     this.mainView( newPet );
   },

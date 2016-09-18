@@ -53,7 +53,8 @@ Jamamoji.prototype = {
   },
 
   poopAtStart: function() {
-    this.showPoop();
+    var poop = new Poop();
+    this.waste.push( poop );
   },
 
   eat: function() {
