@@ -17463,13 +17463,9 @@
 	MainView.prototype = {
 	  display: function() {
 	    var iconPlace = document.getElementById( 'icon-place' );
-	    var cleanPoop = document.getElementById( 'clean-poop' );
 	    var feedPlace = document.getElementById( 'feed-place' );
-	    var medicinePlace = document.getElementById( 'give-medicine' );
-	    var fightPlace = document.getElementById( 'have-fight' );
 	    var petPlace = document.getElementById( 'pet-place' );
 	    var poopPlace = document.getElementById( 'poop-place' );
-	    var giveFood = document.getElementById( 'give-food' );
 	
 	    var petIcon = document.createElement( 'h1' );
 	    petIcon.id = 'pet';
@@ -17482,13 +17478,13 @@
 	
 	    var foodIcon = document.createElement( 'h2' );
 	    setInterval( function() {
-	      foodIcon.innerText = this.pet.showFood();
+	      foodIcon.innerText = this.pet.name.toUpperCase() + "'S TUMMY: " + this.pet.showFood();
 	      feedPlace.appendChild( foodIcon );
 	    }.bind( this ), 1 );
 	
 	    var poopIcon = document.createElement( 'h2' );
 	    setInterval( function() {
-	      poopIcon.innerText = this.pet.showPoop();
+	      poopIcon.innerText = this.pet.name.toUpperCase() + "'S WASTE: " + this.pet.showPoop();
 	      poopPlace.appendChild( poopIcon );
 	    }.bind( this ), 1 );
 	
@@ -17520,6 +17516,10 @@
 	    fightButton.innerText = "👊";
 	    fightButton.id = "fightButton";
 	    fightButton.onclick = function() {
+	      var space = document.getElementById( 'icon-place' );
+	      space.innerText = "";
+	      var signOut = document.getElementById( 'logout-view' );
+	      signOut.style.display = 'none';
 	      this.pet.pause = true;
 	      this.haveFight( this.pet, this.icons );
 	    }.bind( this );
