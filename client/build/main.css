@@ -3,6 +3,7 @@ body {
   animation: background 200s infinite;
   left: 0;
   margin: 0;  
+  font-family: 'Amatic SC', sans-serif;
 }
 
 h3 {
@@ -11,7 +12,6 @@ h3 {
 
 ul {
   text-align: center;
-  padding-left: 0;
 }
 
 li {
@@ -31,6 +31,7 @@ h1#pet.aliveAndWell {
 
 h1.fightPlane {
   font-size: 7vw;
+  font-family: 'Amatic SC:700', sans-serif;
   bottom: 0.01em;
   position: absolute;
   margin: auto;
