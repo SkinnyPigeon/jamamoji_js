@@ -329,7 +329,8 @@
 	        special: this.pet.special,
 	        opponent_bounus: this.pet.opponent_bonus,
 	        block: this.pet.block,
-	        opponent_special: this.pet.opponent_special
+	        opponent_special: this.pet.opponent_special,
+	        level: this.pet.level
 	      }
 	    }
 	    console.log( data );
