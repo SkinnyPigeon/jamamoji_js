@@ -83,7 +83,19 @@
 	    var space = document.getElementById( 'login-view' );
 	    var email = document.createElement( 'input' );
 	    var password = document.createElement( 'input' );
+	
 	    var button = document.createElement( 'button' );
+	    button.innerText = "OK";
+	
+	    var signUpButton = document.createElement( 'button' );
+	    signUpButton.innerText = 'Sign Up...';
+	
+	    signUpButton.onclick = function() {
+	      var signUp = document.getElementById( 'signup-view' );
+	      signUp.style.display = 'block'
+	      var space = document.getElementById( 'login-view' );
+	      space.style.display = 'none';
+	    }
 	
 	    button.onclick = function() {
 	      var emailInput = document.getElementById( 'email' );
@@ -122,6 +134,7 @@
 	    space.appendChild( email );
 	    space.appendChild( password );
 	    space.appendChild( button );
+	    space.appendChild( signUpButton );
 	  },
 	
 	  showJamamoji: function( user ) {
@@ -289,11 +302,23 @@
 	
 	    button.innerText = "Ok";
 	
+	    var backButton = document.createElement( 'button' );
+	    backButton.innerText = "Back..."
+	    backButton.onclick = function() {
+	      var space = document.getElementById( 'signup-view' );
+	      space.style.display = 'none';
+	      var signIn = document.getElementById( 'login-view' );
+	      signIn.style.display = 'block';
+	    }
+	
 	    space.appendChild( petName );
 	    space.appendChild( email );
 	    space.appendChild( password );
 	    space.appendChild( confirmPassword );
 	    space.appendChild( button );
+	    space.appendChild( backButton );
+	
+	    space.style.display = 'none';
 	  },
 	
 	  createPet: function() {
@@ -17466,24 +17491,28 @@
 	    }.bind( this ), 1 );
 	
 	    var poopButton = document.createElement( 'button' );
+	    poopButton.innerText = "🚽";
 	    poopButton.onclick = function() {
 	      this.pet.cleanPoop();
 	    }.bind( this )
 	    cleanPoop.appendChild( poopButton );
 	
 	    var feedButton = document.createElement( 'button' );
+	    feedButton.innerText = "🍔";
 	    feedButton.onclick = function() {
 	     this.pet.eat();
 	    }.bind( this )
 	    giveFood.appendChild( feedButton );
 	
 	    var cureButton = document.createElement( 'button' );
+	    cureButton.innerText = "💊";
 	    cureButton.onclick = function() {
 	      this.pet.cure();
 	    }.bind( this );
 	    medicinePlace.appendChild( cureButton );
 	
 	    var fightButton = document.createElement( 'button' );
+	    fightButton.innerText = "👊";
 	    fightButton.onclick = function() {
 	      this.pet.pause = true;
 	      this.haveFight( this.pet, this.icons );

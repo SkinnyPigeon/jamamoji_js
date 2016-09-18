@@ -9,7 +9,19 @@ LogInView.prototype = {
     var space = document.getElementById( 'login-view' );
     var email = document.createElement( 'input' );
     var password = document.createElement( 'input' );
+
     var button = document.createElement( 'button' );
+    button.innerText = "OK";
+
+    var signUpButton = document.createElement( 'button' );
+    signUpButton.innerText = 'Sign Up...';
+
+    signUpButton.onclick = function() {
+      var signUp = document.getElementById( 'signup-view' );
+      signUp.style.display = 'block'
+      var space = document.getElementById( 'login-view' );
+      space.style.display = 'none';
+    }
 
     button.onclick = function() {
       var emailInput = document.getElementById( 'email' );
@@ -48,6 +60,7 @@ LogInView.prototype = {
     space.appendChild( email );
     space.appendChild( password );
     space.appendChild( button );
+    space.appendChild( signUpButton );
   },
 
   showJamamoji: function( user ) {

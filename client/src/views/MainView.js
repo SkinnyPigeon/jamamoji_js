@@ -45,24 +45,28 @@ MainView.prototype = {
     }.bind( this ), 1 );
 
     var poopButton = document.createElement( 'button' );
+    poopButton.innerText = "🚽";
     poopButton.onclick = function() {
       this.pet.cleanPoop();
     }.bind( this )
     cleanPoop.appendChild( poopButton );
 
     var feedButton = document.createElement( 'button' );
+    feedButton.innerText = "🍔";
     feedButton.onclick = function() {
      this.pet.eat();
     }.bind( this )
     giveFood.appendChild( feedButton );
 
     var cureButton = document.createElement( 'button' );
+    cureButton.innerText = "💊";
     cureButton.onclick = function() {
       this.pet.cure();
     }.bind( this );
     medicinePlace.appendChild( cureButton );
 
     var fightButton = document.createElement( 'button' );
+    fightButton.innerText = "👊";
     fightButton.onclick = function() {
       this.pet.pause = true;
       this.haveFight( this.pet, this.icons );

@@ -73,11 +73,23 @@ SignUpView.prototype = {
 
     button.innerText = "Ok";
 
+    var backButton = document.createElement( 'button' );
+    backButton.innerText = "Back..."
+    backButton.onclick = function() {
+      var space = document.getElementById( 'signup-view' );
+      space.style.display = 'none';
+      var signIn = document.getElementById( 'login-view' );
+      signIn.style.display = 'block';
+    }
+
     space.appendChild( petName );
     space.appendChild( email );
     space.appendChild( password );
     space.appendChild( confirmPassword );
     space.appendChild( button );
+    space.appendChild( backButton );
+
+    space.style.display = 'none';
   },
 
   createPet: function() {
