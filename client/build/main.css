@@ -54,17 +54,11 @@ button.showFight {
 }
 
 #fight-place.fightPlane button {
-  /*[ Position ]*/
-  margin:0 10px 50px 10px;
-  float:left;
-  left: 200px;
-  top:90px;
   /* [ Botton ] */
   position:relative;
   height:50px;
   width:50px;
   cursor:pointer;
-  line-height:47px;
   background-color:#f1f1f1;
   text-align:center;
   font-size:30px;
@@ -125,64 +119,101 @@ button.showFight {
   background-image:linear-gradient(top,transparent,rgba(0,0,0,0.17));
 }
 
-.text-shadow-negra{
+#fight-place.fightPlane button {
   text-shadow:-1px -1px 0 rgba(0,0,0,0.2);
 }
-.text-blanco{
-  color:#F2F2F2;
+
+#fight-place.fightPlane button#right {
+  position: relative;
+  left: 6.5em;
+  margin-bottom: 5px;
+  top: 3em;
+  line-height:44px;
 }
-.text-blanco:hover{
-  color:#DDD;
+
+#fight-place.fightPlane button#left {
+  position: relative;
+  left: 5.5em;
+  margin-bottom: 5px;
+  top: 2.95em;
+  line-height:44px;
 }
-.text-blanco:active{
-  color:#DDC;
+
+#fight-place.fightPlane button#dashRight {
+  position: relative;
+  left: 3.15em;
+  margin-bottom: 5px;
+  top: 5.5em;
+  line-height:44px;
 }
-.blue{
+
+#fight-place.fightPlane button#dashLeft {
+  position: relative;
+  left: 2.13em;
+  margin-bottom: 5px;
+  top: 5.42em;
+  line-height:44px;
+}
+
+#fight-place.fightPlane button#punch {
   background-color:#659AE0;
   border-bottom-color:#436796;
   border-left-color:#5981AF;
   border-right-color:#5981AF;
   border-top-color:#719CCE;
+  position: relative;
+  float: right;
+  right: 3.5em;
+  margin-bottom: 5px;
+  top: 4em;
+  line-height:47px;
 }
-.red{
+#fight-place.fightPlane button#kick {
   background-color:#C46A6A;
   border-bottom-color:#A05D5D;
   border-left-color:#AF5757;
   border-right-color:#AF5757;
   border-top-color:#C66767;
+  position: relative;
+  float: right;
+  right: 4.15em;
+  margin-bottom: 5px;
+  top: 6.3em;
+  line-height:47px;
 }
-.green{
+#fight-place.fightPlane button#block{
   background-color:#82C43A;
   border-color:#578720;
+  position: relative;
+  float: right;
+  right: 3.2em;
+  margin-bottom: 5px;
+  top: 4em;
+  line-height:47px;
 }
-.yellow{
+#fight-place.fightPlane button#special{
   background-color:#EFEC40;
   border-color:#9B9800;
+  position: relative;
+  float: right;
+  right: 2.55em;
+  margin-bottom: 5px;
+  top: 1.45em;
+  line-height:47px;
 }
-.brown{
-  background-color:#594343;
-  border-bottom-color:#423F1B;
-  border-right-color:#3F3D28;
-  border-left-color:#3F3D28;
-  border-top-color:#7C6262;
-}
-.black{
-  background-color:#555;
-  border-bottom-color:#444;
-  border-left-color:#666;
-  border-right-color:#666;
-  border-top-color:#777;
-}
-.orange{
+
+#fight-place.fightPlane button#endTurn{
   background-color:#FAA407;
   border-bottom-color:#BA7500;
   border-left-color:#DB8A00;
   border-right-color:#DB8A00;
   border-top-color:#E89200;
-}
-
-button#fight-place {
-
+  position: relative;
+  float: right;
+  right: -0.83em;
+  margin-bottom: 5px;
+  top: 4em;
+  line-height:47px;
 }
 
 button.hideFight {
