@@ -9,6 +9,7 @@ SignOutView.prototype = {
     var space = document.getElementById( 'logout-view' );
     var button = document.createElement( 'button' );
     button.innerText = 'Sign Out...';
+    button.id = "signOut";
     space.appendChild( button );
 
     button.onclick = function() {

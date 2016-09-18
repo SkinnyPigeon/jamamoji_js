@@ -343,6 +343,7 @@
 	    var space = document.getElementById( 'logout-view' );
 	    var button = document.createElement( 'button' );
 	    button.innerText = 'Sign Out...';
+	    button.id = "signOut";
 	    space.appendChild( button );
 	
 	    button.onclick = function() {
@@ -17461,6 +17462,7 @@
 	
 	MainView.prototype = {
 	  display: function() {
+	    var iconPlace = document.getElementById( 'icon-place' );
 	    var cleanPoop = document.getElementById( 'clean-poop' );
 	    var feedPlace = document.getElementById( 'feed-place' );
 	    var medicinePlace = document.getElementById( 'give-medicine' );
@@ -17492,32 +17494,36 @@
 	
 	    var poopButton = document.createElement( 'button' );
 	    poopButton.innerText = "🚽";
+	    poopButton.id = "poopButton";
 	    poopButton.onclick = function() {
 	      this.pet.cleanPoop();
 	    }.bind( this )
-	    cleanPoop.appendChild( poopButton );
+	    iconPlace.appendChild( poopButton );
 	
 	    var feedButton = document.createElement( 'button' );
 	    feedButton.innerText = "🍔";
+	    feedButton.id = "feedButton";
 	    feedButton.onclick = function() {
 	     this.pet.eat();
 	    }.bind( this )
-	    giveFood.appendChild( feedButton );
+	    iconPlace.appendChild( feedButton );
 	
 	    var cureButton = document.createElement( 'button' );
 	    cureButton.innerText = "💊";
+	    cureButton.id = "cureButton";
 	    cureButton.onclick = function() {
 	      this.pet.cure();
 	    }.bind( this );
-	    medicinePlace.appendChild( cureButton );
+	    iconPlace.appendChild( cureButton );
 	
 	    var fightButton = document.createElement( 'button' );
 	    fightButton.innerText = "👊";
+	    fightButton.id = "fightButton";
 	    fightButton.onclick = function() {
 	      this.pet.pause = true;
 	      this.haveFight( this.pet, this.icons );
 	    }.bind( this );
-	    fightPlace.appendChild( fightButton );
+	    iconPlace.appendChild( fightButton );
 	
 	    this.icons.push( petIcon );
 	    this.icons.push( foodIcon );
