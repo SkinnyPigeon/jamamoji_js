@@ -40,7 +40,7 @@ button.hideFight {
   display: none;
 }
 
-h1.hidden {
+h1#pet.hidden {
   display: none;
 }
 

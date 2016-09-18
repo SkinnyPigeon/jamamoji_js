@@ -28,10 +28,10 @@ var Jamamoji = function( name, icon ) {
 Jamamoji.prototype = {
 
   countHappiness: function() {
-    if( this.pause ) {
-      return;
-    }
     setInterval( function() {
+      if( this.pause ) {
+        return;
+      }
       if( this.icon === this.originalIcon ) {
         this.happyCount += 1;
         this.checkForLevels();
@@ -43,6 +43,7 @@ Jamamoji.prototype = {
     if( this.happyCount % 10 === 0 ) {
       this.level += 1;
       console.log( this.level );
+      console.log( this.pause );
     }
   },
 
@@ -77,13 +78,13 @@ Jamamoji.prototype = {
   },
   
   hunger: function() {
-    if( this.pause ) {
-      return;
-    }
     if( this.checkDead() ) {
       return;
     }
     setInterval( function() {
+      if( this.pause ) {
+        return;
+      }
       var total = this.food.length;
       this.digest( total );
     }.bind( this ), 10000)
@@ -152,10 +153,10 @@ Jamamoji.prototype = {
   },
 
   dead: function() {
-    if( this.pause ) {
-      return;
-    }
     setInterval( function() {
+      if( this.pause ) {
+        return;
+      }
       if( this.health <= 0 || 
           this.waste.length >= 5 ) {
         this.alive = false;
@@ -167,10 +168,10 @@ Jamamoji.prototype = {
   },
 
   sick: function() {
-    if( this.pause ) {
-      return;
-    }
     setInterval( function() {
+      if( this.pause ) {
+        return;
+      }
       if( this.checkDead() ) {
         return;
       }
@@ -184,11 +185,10 @@ Jamamoji.prototype = {
   },
 
   setMood: function() {
-    if( this.pause ) {
-      return;
-    }
-    console.log( this.pause );
     setInterval( function() {
+      if( this.pause ) {
+        return;
+      }
       if( this.icon === "😷" || this.icon === "☠️" ) {
         return;
       }

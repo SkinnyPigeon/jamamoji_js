@@ -64,6 +64,7 @@ MainView.prototype = {
     var fightButton = document.createElement( 'button' );
     fightButton.onclick = function() {
       this.pet.pause = true;
+      console.log( this.pet.pause );
       this.haveFight( this.pet, this.icons );
     }.bind( this );
     fightPlace.appendChild( fightButton );

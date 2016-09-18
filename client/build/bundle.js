@@ -378,10 +378,10 @@
 	Jamamoji.prototype = {
 	
 	  countHappiness: function() {
-	    if( this.pause ) {
-	      return;
-	    }
 	    setInterval( function() {
+	      if( this.pause ) {
+	        return;
+	      }
 	      if( this.icon === this.originalIcon ) {
 	        this.happyCount += 1;
 	        this.checkForLevels();
@@ -393,6 +393,7 @@
 	    if( this.happyCount % 10 === 0 ) {
 	      this.level += 1;
 	      console.log( this.level );
+	      console.log( this.pause );
 	    }
 	  },
 	
@@ -427,13 +428,13 @@
 	  },
 	  
 	  hunger: function() {
-	    if( this.pause ) {
-	      return;
-	    }
 	    if( this.checkDead() ) {
 	      return;
 	    }
 	    setInterval( function() {
+	      if( this.pause ) {
+	        return;
+	      }
 	      var total = this.food.length;
 	      this.digest( total );
 	    }.bind( this ), 10000)
@@ -502,10 +503,10 @@
 	  },
 	
 	  dead: function() {
-	    if( this.pause ) {
-	      return;
-	    }
 	    setInterval( function() {
+	      if( this.pause ) {
+	        return;
+	      }
 	      if( this.health <= 0 || 
 	          this.waste.length >= 5 ) {
 	        this.alive = false;
@@ -517,10 +518,10 @@
 	  },
 	
 	  sick: function() {
-	    if( this.pause ) {
-	      return;
-	    }
 	    setInterval( function() {
+	      if( this.pause ) {
+	        return;
+	      }
 	      if( this.checkDead() ) {
 	        return;
 	      }
@@ -534,11 +535,10 @@
 	  },
 	
 	  setMood: function() {
-	    if( this.pause ) {
-	      return;
-	    }
-	    console.log( this.pause );
 	    setInterval( function() {
+	      if( this.pause ) {
+	        return;
+	      }
 	      if( this.icon === "😷" || this.icon === "☠️" ) {
 	        return;
 	      }
@@ -17481,6 +17481,7 @@
 	    var fightButton = document.createElement( 'button' );
 	    fightButton.onclick = function() {
 	      this.pet.pause = true;
+	      console.log( this.pet.pause );
 	      this.haveFight( this.pet, this.icons );
 	    }.bind( this );
 	    fightPlace.appendChild( fightButton );
