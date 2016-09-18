@@ -5,10 +5,10 @@ var Game = require( '../models/game' );
 
 var FightView = function() {
   var j1 = new Jamamoji( "jeff", "🤓" );
-  j1.position = 3;
+  j1.position = 5;
   j1.energy = 150;
   var j2 = new Jamamoji( "dave", "😀" );
-  j2.position = 6;
+  j2.position = 8;
 
   var b1 = new BattleJamamoji( j1 );
   var b2 = new BattleJamamoji( j2 );
@@ -75,7 +75,8 @@ FightView.prototype = {
   moveLeft: function(){
     var fightPlace = document.getElementById( 'fight-place' );
     var leftButton = document.createElement( 'button' );
-    leftButton.innerText = "left";
+    leftButton.innerText = "←";
+    leftButton.id = "left";
     leftButton.onclick = function() {
       var player = this.game.currentPlayer;
       player.moveLeft( player, this.arena.state );
@@ -87,7 +88,8 @@ FightView.prototype = {
   moveRight: function() {
     var fightPlace = document.getElementById( 'fight-place' );
     var rightButton = document.createElement( 'button' );
-    rightButton.innerText = "right";
+    rightButton.innerText = "→";
+    rightButton.id = "right";
     rightButton.onclick = function() {
       var player = this.game.currentPlayer;
       player.moveRight( player, this.arena.state );
@@ -96,10 +98,37 @@ FightView.prototype = {
     fightPlace.appendChild( rightButton );
   },
 
+  dashLeft: function(){
+    var fightPlace = document.getElementById( 'fight-place' );
+    var dashLeftButton = document.createElement( 'button' );
+    dashLeftButton.innerText = "⇤";
+    dashLeftButton.id = "dashLeft";
+    dashLeftButton.onclick = function() {
+      var player = this.game.currentPlayer;
+      player.dashLeft( player, this.arena.state, this.game );
+      this.display();
+    }.bind( this );
+    fightPlace.appendChild( dashLeftButton );
+  },
+
+  dashRight: function() {
+    var fightPlace = document.getElementById( 'fight-place' );
+    var dashRightButton = document.createElement( 'button' );
+    dashRightButton.innerText = "⇥";
+    dashRightButton.id = "dashRight";
+    dashRightButton.onclick = function() {
+      var player = this.game.currentPlayer;
+      player.dashRight( player, this.arena.state, this.game );
+      this.display();
+    }.bind( this );
+    fightPlace.appendChild( dashRightButton );
+  },
+
   punch: function() {
     var fightPlace = document.getElementById( 'fight-place' );
     var punchButton = document.createElement( 'button' );
-    punchButton.innerText = "punch";
+    punchButton.innerText = "👊";
+    punchButton.id = "punch";
     punchButton.onclick = function() {
       var currentPlayer = this.game.currentPlayer;
       var otherPlayer = this.game.otherPlayer;
@@ -112,7 +141,8 @@ FightView.prototype = {
   kick: function() {
     var fightPlace = document.getElementById( 'fight-place' );
     var kickButton = document.createElement( 'button' );
-    kickButton.innerText = "kick";
+    kickButton.innerText = "👟";
+    kickButton.id = "kick";
     kickButton.onclick = function() {
       var currentPlayer = this.game.currentPlayer;
       var otherPlayer = this.game.otherPlayer;
@@ -122,34 +152,11 @@ FightView.prototype = {
     fightPlace.appendChild( kickButton );
   },
 
-  dashLeft: function(){
-    var fightPlace = document.getElementById( 'fight-place' );
-    var dashLeftButton = document.createElement( 'button' );
-    dashLeftButton.innerText = "dashLeft";
-    dashLeftButton.onclick = function() {
-      var player = this.game.currentPlayer;
-      player.dashLeft( player, this.arena.state, this.game );
-      this.display();
-    }.bind( this );
-    fightPlace.appendChild( dashLeftButton );
-  },
-
-  dashRight: function() {
-    var fightPlace = document.getElementById( 'fight-place' );
-    var dashRightButton = document.createElement( 'button' );
-    dashRightButton.innerText = "dashRight";
-    dashRightButton.onclick = function() {
-      var player = this.game.currentPlayer;
-      player.dashRight( player, this.arena.state, this.game );
-      this.display();
-    }.bind( this );
-    fightPlace.appendChild( dashRightButton );
-  },
-
   special: function() {
     var fightPlace = document.getElementById( 'fight-place' );
     var specialButton = document.createElement( 'button' );
-    specialButton.innerText = "special";
+    specialButton.innerText = "💥";
+    specialButton.id = "special";
     specialButton.onclick = function() {
       var currentPlayer = this.game.currentPlayer;
       var otherPlayer = this.game.otherPlayer;
@@ -162,7 +169,8 @@ FightView.prototype = {
   block: function() {
     var fightPlace = document.getElementById( 'fight-place' );
     var blockButton = document.createElement( 'button' );
-    blockButton.innerText = "block";
+    blockButton.innerText = "💪";
+    blockButton.id = "block";
     blockButton.onclick = function() {
       var currentPlayer = this.game.currentPlayer;
       currentPlayer.blockHit( currentPlayer );
@@ -174,7 +182,8 @@ FightView.prototype = {
   endTurn: function() {
     var fightPlace = document.getElementById( 'fight-place' );
     var endTurnButton = document.createElement( 'button' );
-    endTurnButton.innerText = "endTurn";
+    endTurnButton.innerText = "💤";
+    endTurnButton.id = "endTurn";
     endTurnButton.onclick = function() {
       var currentPlayer = this.game.currentPlayer;
       var otherPlayer = this.game.otherPlayer;

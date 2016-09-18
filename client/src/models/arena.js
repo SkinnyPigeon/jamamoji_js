@@ -1,7 +1,7 @@
 var _ = require( 'lodash' );
 
 var Arena = function() {
-  this.state = _.fill( Array(8), '_' );
+  this.state = _.fill( Array(12), '_' );
 }
 
 Arena.prototype = {
