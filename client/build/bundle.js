@@ -441,7 +441,7 @@
 	      }
 	      var total = this.food.length;
 	      this.digest( total );
-	    }.bind( this ), 3000000)
+	    }.bind( this ), 600000)
 	  },
 	
 	  digest: function( total ) {
@@ -470,7 +470,7 @@
 	    setTimeout( function() {
 	      var plop = new Poop();
 	      this.waste.push( plop );
-	    }.bind( this ) , 3000000)
+	    }.bind( this ) , 600000)
 	    return;
 	  },
 	
@@ -484,7 +484,7 @@
 	    setTimeout( function() {
 	      var plop = new Poop();
 	      this.waste.push( plop );
-	    }.bind( this ) , 5000000)
+	    }.bind( this ) , 600000)
 	    return;
 	  },
 	
