@@ -42,8 +42,10 @@ Jamamoji.prototype = {
   checkForLevels: function() {
     if( this.happyCount % 10 === 0 ) {
       this.level += 1;
-      console.log( this.level );
-      console.log( this.pause );
+    }
+    if( this.level % 5 === 0 ) {
+      this.health *= 1.1;
+      this.energy *= 1.1;
     }
   },
 
@@ -214,31 +216,6 @@ Jamamoji.prototype = {
   setHunger: function() {
     if( this.food.length === 0) {
       this.hungry = true
-    }
-  },
-
-  punch: function( opponent ) {
-      if( this.energy > 0 ){
-      this.damage = 5;
-      opponent.health -= this.damage;
-      this.damage = 0;
-      this.energy -= 1;
-    }
-  },
-
-  super: function( opponent ) {
-    if( this.health >= 50 && this.special > 0 && this.energy === 3 ) {
-      this.damage = 15;
-      opponent.health -= this.damage;
-      this.damage = 0;
-      this.special -= 1;
-      this.energy -= 3;
-    }
-  },
-
-  rest: function() {
-    if( this.energy <= 2 ) {
-      this.energy += 1
     }
   },
 

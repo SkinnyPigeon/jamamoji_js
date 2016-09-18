@@ -3,8 +3,8 @@ var BattleJamamoji = require( '../models/battleJamamoji' );
 var Arena = require( '../models/arena' );
 var Game = require( '../models/game' );
 
-var FightView = function() {
-  var j1 = new Jamamoji( "jeff", "🤓" );
+var FightView = function( jamamoji ) {
+  var j1 = jamamoji;
   j1.position = 5;
   j1.energy = 150;
   var j2 = new Jamamoji( "dave", "😀" );

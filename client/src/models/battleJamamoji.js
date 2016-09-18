@@ -2,6 +2,7 @@ var BattleJamamoji = function( jamamoji ) {
   this.name = jamamoji.name;
   this.icon = jamamoji.icon;
   this.health = jamamoji.health;
+  console.log( jamamoji.health );
   this.energy = jamamoji.energy;
   this.position = jamamoji.position;
   this.opponentBonus = jamamoji.opponent_bonus;

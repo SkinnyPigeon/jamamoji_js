@@ -392,8 +392,10 @@
 	  checkForLevels: function() {
 	    if( this.happyCount % 10 === 0 ) {
 	      this.level += 1;
-	      console.log( this.level );
-	      console.log( this.pause );
+	    }
+	    if( this.level % 5 === 0 ) {
+	      this.health *= 1.1;
+	      this.energy *= 1.1;
 	    }
 	  },
 	
@@ -564,31 +566,6 @@
 	  setHunger: function() {
 	    if( this.food.length === 0) {
 	      this.hungry = true
-	    }
-	  },
-	
-	  punch: function( opponent ) {
-	      if( this.energy > 0 ){
-	      this.damage = 5;
-	      opponent.health -= this.damage;
-	      this.damage = 0;
-	      this.energy -= 1;
-	    }
-	  },
-	
-	  super: function( opponent ) {
-	    if( this.health >= 50 && this.special > 0 && this.energy === 3 ) {
-	      this.damage = 15;
-	      opponent.health -= this.damage;
-	      this.damage = 0;
-	      this.special -= 1;
-	      this.energy -= 3;
-	    }
-	  },
-	
-	  rest: function() {
-	    if( this.energy <= 2 ) {
-	      this.energy += 1
 	    }
 	  },
 	
@@ -17471,7 +17448,6 @@
 	    var fightButton = document.createElement( 'button' );
 	    fightButton.onclick = function() {
 	      this.pet.pause = true;
-	      console.log( this.pet.pause );
 	      this.haveFight( this.pet, this.icons );
 	    }.bind( this );
 	    fightPlace.appendChild( fightButton );
@@ -17490,7 +17466,7 @@
 	    console.log( pet )
 	    pet.pause = true;
 	    this.resetView();
-	    var fight = new FightView();
+	    var fight = new FightView( pet );
 	    console.log( this.icons );
 	    this.hide();
 	  },
@@ -17525,8 +17501,8 @@
 	var Arena = __webpack_require__( 13 );
 	var Game = __webpack_require__( 14 );
 	
-	var FightView = function() {
-	  var j1 = new Jamamoji( "jeff", "🤓" );
+	var FightView = function( jamamoji ) {
+	  var j1 = jamamoji;
 	  j1.position = 5;
 	  j1.energy = 150;
 	  var j2 = new Jamamoji( "dave", "😀" );
@@ -17738,6 +17714,7 @@
 	  this.name = jamamoji.name;
 	  this.icon = jamamoji.icon;
 	  this.health = jamamoji.health;
+	  console.log( jamamoji.health );
 	  this.energy = jamamoji.energy;
 	  this.position = jamamoji.position;
 	  this.opponentBonus = jamamoji.opponent_bonus;
