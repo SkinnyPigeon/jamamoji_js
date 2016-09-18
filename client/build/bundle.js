@@ -386,7 +386,7 @@
 	        this.happyCount += 1;
 	        this.checkForLevels();
 	      }
-	    }.bind( this ), 1000 )
+	    }.bind( this ), 120000 )
 	  },
 	
 	  checkForLevels: function() {
@@ -400,6 +400,10 @@
 	  eatAtStartUp: function() {
 	    var burger = new Food();
 	    this.food.push( burger );
+	  },
+	
+	  poopAtStart: function() {
+	    this.showPoop();
 	  },
 	
 	  eat: function() {
@@ -437,7 +441,7 @@
 	      }
 	      var total = this.food.length;
 	      this.digest( total );
-	    }.bind( this ), 10000)
+	    }.bind( this ), 3000000)
 	  },
 	
 	  digest: function( total ) {
@@ -466,7 +470,7 @@
 	    setTimeout( function() {
 	      var plop = new Poop();
 	      this.waste.push( plop );
-	    }.bind( this ) , 5000)
+	    }.bind( this ) , 3000000)
 	    return;
 	  },
 	
@@ -480,7 +484,7 @@
 	    setTimeout( function() {
 	      var plop = new Poop();
 	      this.waste.push( plop );
-	    }.bind( this ) , 10000)
+	    }.bind( this ) , 5000000)
 	    return;
 	  },
 	
@@ -17407,6 +17411,7 @@
 	  this.pet.hunger();
 	  this.pet.sick();
 	  this.pet.dead();
+	  this.pet.poopAtStart();
 	  this.pet.setMood();
 	  this.pet.countHappiness();
 	  this.displaySignOut( this.pet );

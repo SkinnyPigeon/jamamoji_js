@@ -6,6 +6,7 @@ var MainView = function( pet ) {
   this.pet.hunger();
   this.pet.sick();
   this.pet.dead();
+  this.pet.poopAtStart();
   this.pet.setMood();
   this.pet.countHappiness();
   this.displaySignOut( this.pet );
