@@ -13,17 +13,15 @@ SignOutView.prototype = {
 
     button.onclick = function() {
       this.updatePet();
-    //   var request = new XMLHttpRequest();
-    //   request.open( 'DELETE', this.url );
-    //   request.setRequestHeader( "Content-type", "application/json" );
-    //   request.withCredentials = true;
-    //   request.onload = () => {
-    //     if( request.status === 204 ) {
-    //     }
-    //   }
-    //   request.send( null );
-    // }.bind( this ),
-
+      var request = new XMLHttpRequest();
+      request.open( 'DELETE', this.url );
+      request.setRequestHeader( "Content-type", "application/json" );
+      request.withCredentials = true;
+      request.onload = () => {
+        if( request.status === 204 ) {
+        }
+      }
+      request.send( null );
     }.bind( this )
   },
 
