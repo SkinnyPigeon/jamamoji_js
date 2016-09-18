@@ -1,6 +1,6 @@
 body {
-  -webkit-animation: background 100s cubic-bezier(1,0,0,1) infinite;
-  animation: background 100s cubic-bezier(1,0,0,1) infinite;
+  -webkit-animation: background 200s infinite;
+  animation: background 200s infinite;
   left: 0;
   margin: 0;  
 }
@@ -40,7 +40,7 @@ button.hideFight {
   display: none;
 }
 
-h1#pet.hidden {
+h1.hidden {
   display: none;
 }
 
@@ -111,7 +111,7 @@ img {
 @-webkit-keyframes background {
   0% { background-color: #191621; }
   6% { background-color: #20202c; }
-  12% { background-color: #3a3a52; }
+  12% { background-color: #3A3A52; }
   16% { background-color: #515175; }
   20% { background-color: #8a76ab; }
   24% { background-color: #cd82a0; }

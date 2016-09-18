@@ -1,24 +1,6 @@
 var SignOutView = require( '../views/SignOutView' );
 var FightView = require( '../views/FightView' );
 
-// var Jamamoji = require( '../models/jamamoji' );
-// var BattleJamamoji = require( '../models/battleJamamoji' );
-// var Arena = require( '../models/arena' );
-// var Game = require( '../models/game' );
-
-// var j1 = new Jamamoji( "jeff", "🤓" );
-// j1.position = 3;
-// var j2 = new Jamamoji( "dave", "😀" );
-// j2.position = 6;
-
-// var b1 = new BattleJamamoji( j1 );
-// var b2 = new BattleJamamoji( j2 );
-// var players = [ b1, b2 ];
-// var arena = new Arena();
-// var game = new Game( players, arena );
-// arena.spawnPlayers( b1, b2 );
-// game.randomStart();
-
 var MainView = function( pet ) {
   this.pet = pet;
   this.pet.hunger();
@@ -42,7 +24,7 @@ MainView.prototype = {
 
     var petIcon = document.createElement( 'h1' );
     petIcon.id = 'pet';
-    petIcon.className = 'aliveAndWell';
+    petIcon.className = 'hidden';
 
     setInterval( function() {
       petIcon.innerText = this.pet.icon;
@@ -81,6 +63,7 @@ MainView.prototype = {
 
     var fightButton = document.createElement( 'button' );
     fightButton.onclick = function() {
+      this.pet.pause = true;
       this.haveFight( this.pet, this.icons );
     }.bind( this );
     fightPlace.appendChild( fightButton );
@@ -96,10 +79,12 @@ MainView.prototype = {
   },
 
   haveFight: function( pet ) {
-    pet.pause();
+    console.log( pet )
+    pet.pause = true;
+    this.resetView();
     var fight = new FightView();
     console.log( this.icons );
-    this.hide( this.icons );
+    this.hide();
   },
 
   hide: function() {
@@ -108,11 +93,14 @@ MainView.prototype = {
     }
   },
 
-  show: function() {
-    this.icons[0].className = 'aliveAndWell';
-    this.icons[1].className = 'icons';
-    this.icons[2].className = 'icons';
-  },
+
+  resetView: function() {
+    var petPlace = document.getElementById( 'pet-place' );
+    var pet = document.getElementById( 'pet' );
+    pet.innerText = "";
+    console.log( pet );
+    petPlace.appendChild( pet );
+  }
 
 
 }

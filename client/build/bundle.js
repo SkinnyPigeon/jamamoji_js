@@ -372,6 +372,7 @@
 	  this.opponent_special = 3;
 	  this.level = 1;
 	  this.happyCount = 0;
+	  this.pause = false;
 	}
 	
 	Jamamoji.prototype = {
@@ -536,6 +537,7 @@
 	    if( this.pause ) {
 	      return;
 	    }
+	    console.log( this.pause );
 	    setInterval( function() {
 	      if( this.icon === "😷" || this.icon === "☠️" ) {
 	        return;
@@ -606,7 +608,7 @@
 	    return pet;
 	  },
 	
-	  pause: function() {
+	  pauseActions: function() {
 	    this.pause = true;
 	  },
 	
@@ -17416,24 +17418,6 @@
 	var SignOutView = __webpack_require__( 4 );
 	var FightView = __webpack_require__( 11 );
 	
-	// var Jamamoji = require( '../models/jamamoji' );
-	// var BattleJamamoji = require( '../models/battleJamamoji' );
-	// var Arena = require( '../models/arena' );
-	// var Game = require( '../models/game' );
-	
-	// var j1 = new Jamamoji( "jeff", "🤓" );
-	// j1.position = 3;
-	// var j2 = new Jamamoji( "dave", "😀" );
-	// j2.position = 6;
-	
-	// var b1 = new BattleJamamoji( j1 );
-	// var b2 = new BattleJamamoji( j2 );
-	// var players = [ b1, b2 ];
-	// var arena = new Arena();
-	// var game = new Game( players, arena );
-	// arena.spawnPlayers( b1, b2 );
-	// game.randomStart();
-	
 	var MainView = function( pet ) {
 	  this.pet = pet;
 	  this.pet.hunger();
@@ -17457,7 +17441,7 @@
 	
 	    var petIcon = document.createElement( 'h1' );
 	    petIcon.id = 'pet';
-	    petIcon.className = 'aliveAndWell';
+	    petIcon.className = 'hidden';
 	
 	    setInterval( function() {
 	      petIcon.innerText = this.pet.icon;
@@ -17496,6 +17480,7 @@
 	
 	    var fightButton = document.createElement( 'button' );
 	    fightButton.onclick = function() {
+	      this.pet.pause = true;
 	      this.haveFight( this.pet, this.icons );
 	    }.bind( this );
 	    fightPlace.appendChild( fightButton );
@@ -17511,10 +17496,12 @@
 	  },
 	
 	  haveFight: function( pet ) {
-	    pet.pause();
+	    console.log( pet )
+	    pet.pause = true;
+	    this.resetView();
 	    var fight = new FightView();
 	    console.log( this.icons );
-	    this.hide( this.icons );
+	    this.hide();
 	  },
 	
 	  hide: function() {
@@ -17523,11 +17510,14 @@
 	    }
 	  },
 	
-	  show: function() {
-	    this.icons[0].className = 'aliveAndWell';
-	    this.icons[1].className = 'icons';
-	    this.icons[2].className = 'icons';
-	  },
+	
+	  resetView: function() {
+	    var petPlace = document.getElementById( 'pet-place' );
+	    var pet = document.getElementById( 'pet' );
+	    pet.innerText = "";
+	    console.log( pet );
+	    petPlace.appendChild( pet );
+	  }
 	
 	
 	}
@@ -17568,7 +17558,6 @@
 	
 	  display: function() {
 	    this.resetView();
-	    console.log( this.game );
 	    var fightPlace = document.getElementById( 'fight-place' );
 	    var fight = document.createElement( 'h1' );
 	    fight.innerText = this.arena.showArena();
@@ -17699,7 +17688,9 @@
 	
 	  resetView: function() {
 	    var fightPlace = document.getElementById( 'fight-place' );
+	    var petPlace = document.getElementById( 'pet-place' );
 	    fightPlace.innerText = "";
+	    petPlace.innerText = "";
 	  }
 	}
 	

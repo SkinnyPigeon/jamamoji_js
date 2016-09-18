@@ -22,6 +22,7 @@ var Jamamoji = function( name, icon ) {
   this.opponent_special = 3;
   this.level = 1;
   this.happyCount = 0;
+  this.pause = false;
 }
 
 Jamamoji.prototype = {
@@ -186,6 +187,7 @@ Jamamoji.prototype = {
     if( this.pause ) {
       return;
     }
+    console.log( this.pause );
     setInterval( function() {
       if( this.icon === "😷" || this.icon === "☠️" ) {
         return;
@@ -256,7 +258,7 @@ Jamamoji.prototype = {
     return pet;
   },
 
-  pause: function() {
+  pauseActions: function() {
     this.pause = true;
   },
 

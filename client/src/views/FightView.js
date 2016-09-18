@@ -27,7 +27,6 @@ FightView.prototype = {
 
   display: function() {
     this.resetView();
-    console.log( this.game );
     var fightPlace = document.getElementById( 'fight-place' );
     var fight = document.createElement( 'h1' );
     fight.innerText = this.arena.showArena();
@@ -158,7 +157,9 @@ FightView.prototype = {
 
   resetView: function() {
     var fightPlace = document.getElementById( 'fight-place' );
+    var petPlace = document.getElementById( 'pet-place' );
     fightPlace.innerText = "";
+    petPlace.innerText = "";
   }
 }
 
