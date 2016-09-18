@@ -430,9 +430,9 @@
 	  this.damage = 0;
 	  this.health = 100;
 	  this.special = 3;
-	  this.opponent_bonus = 0;
+	  this.opponentBonus = 0;
 	  this.block = 0;
-	  this.opponent_special = 3;
+	  this.opponentSpecial = 3;
 	  this.level = 1;
 	  this.happyCount = 0;
 	  this.pause = false;
@@ -17790,10 +17790,10 @@
 	  console.log( jamamoji.health );
 	  this.energy = jamamoji.energy;
 	  this.position = jamamoji.position;
-	  this.opponentBonus = jamamoji.opponent_bonus;
+	  this.opponentBonus = jamamoji.opponentBonus;
 	  this.block = jamamoji.block;
 	  this.originalBlock = jamamoji.block;
-	  this.opponentSpecial = jamamoji.opponent_special;
+	  this.opponentSpecial = jamamoji.opponentSpecial;
 	}
 	
 	BattleJamamoji.prototype = {

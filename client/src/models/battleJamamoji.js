@@ -5,10 +5,10 @@ var BattleJamamoji = function( jamamoji ) {
   console.log( jamamoji.health );
   this.energy = jamamoji.energy;
   this.position = jamamoji.position;
-  this.opponentBonus = jamamoji.opponent_bonus;
+  this.opponentBonus = jamamoji.opponentBonus;
   this.block = jamamoji.block;
   this.originalBlock = jamamoji.block;
-  this.opponentSpecial = jamamoji.opponent_special;
+  this.opponentSpecial = jamamoji.opponentSpecial;
 }
 
 BattleJamamoji.prototype = {
