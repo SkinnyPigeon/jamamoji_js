@@ -26,8 +26,6 @@ LogInView.prototype = {
     button.onclick = function() {
       var emailInput = document.getElementById( 'email' );
       var passwordInput = document.getElementById( 'password' );
-      console.log( emailInput.value );
-      console.log( passwordInput.value );
 
       var request = new XMLHttpRequest();
       request.open( 'POST', this.url );

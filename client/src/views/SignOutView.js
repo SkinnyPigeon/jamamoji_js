@@ -54,10 +54,10 @@ SignOutView.prototype = {
         opponent_bounus: this.pet.opponent_bonus,
         block: this.pet.block,
         opponent_special: this.pet.opponent_special,
-        level: this.pet.level
+        level: this.pet.level,
+        happy_count: this.pet.happyCount
       }
     }
-    console.log( data );
     request.send( JSON.stringify( data ));
   },
 

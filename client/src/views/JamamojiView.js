@@ -25,14 +25,12 @@ JamamojiView.prototype = {
     for( var i = 0; i < jamamojis.length; i++ ) {
       if( jamamojis[i].user_id === this.user.id ) {
         this.makeJamamoji( jamamojis[i] );
-        console.log( jamamojis[i] );
       }
     }
   },
 
   makeJamamoji: function( jamamoji ) {
     var pet = new Jamamoji( jamamoji.name, jamamoji.icon );
-    console.log( pet );
     pet.id = jamamoji.id;
     pet.alive = jamamoji.alive;
     pet.block = jamamoji.block;
@@ -41,9 +39,10 @@ JamamojiView.prototype = {
     pet.happy = jamamoji.happy;
     pet.health = jamamoji.health;
     pet.hungry = jamamoji.hungry;
-    pet.opponent_bonus = jamamoji.opponent_bonus;
-    pet.opponent_special = jamamoji.opponent_special;
+    pet.opponentBonus = jamamoji.opponent_bonus;
+    pet.opponentSpecial = jamamoji.opponent_special;
     pet.special = jamamoji.special;
+    pet.happyCount = jamamoji.happy_count;
     this.fillPet( pet, jamamoji );
   },
 

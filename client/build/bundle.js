@@ -100,8 +100,6 @@
 	    button.onclick = function() {
 	      var emailInput = document.getElementById( 'email' );
 	      var passwordInput = document.getElementById( 'password' );
-	      console.log( emailInput.value );
-	      console.log( passwordInput.value );
 	
 	      var request = new XMLHttpRequest();
 	      request.open( 'POST', this.url );
@@ -183,14 +181,12 @@
 	    for( var i = 0; i < jamamojis.length; i++ ) {
 	      if( jamamojis[i].user_id === this.user.id ) {
 	        this.makeJamamoji( jamamojis[i] );
-	        console.log( jamamojis[i] );
 	      }
 	    }
 	  },
 	
 	  makeJamamoji: function( jamamoji ) {
 	    var pet = new Jamamoji( jamamoji.name, jamamoji.icon );
-	    console.log( pet );
 	    pet.id = jamamoji.id;
 	    pet.alive = jamamoji.alive;
 	    pet.block = jamamoji.block;
@@ -199,9 +195,10 @@
 	    pet.happy = jamamoji.happy;
 	    pet.health = jamamoji.health;
 	    pet.hungry = jamamoji.hungry;
-	    pet.opponent_bonus = jamamoji.opponent_bonus;
-	    pet.opponent_special = jamamoji.opponent_special;
+	    pet.opponentBonus = jamamoji.opponent_bonus;
+	    pet.opponentSpecial = jamamoji.opponent_special;
 	    pet.special = jamamoji.special;
+	    pet.happyCount = jamamoji.happy_count;
 	    this.fillPet( pet, jamamoji );
 	  },
 	
@@ -388,10 +385,10 @@
 	        opponent_bounus: this.pet.opponent_bonus,
 	        block: this.pet.block,
 	        opponent_special: this.pet.opponent_special,
-	        level: this.pet.level
+	        level: this.pet.level,
+	        happy_count: this.pet.happyCount
 	      }
 	    }
-	    console.log( data );
 	    request.send( JSON.stringify( data ));
 	  },
 	
