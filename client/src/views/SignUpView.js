@@ -1,3 +1,6 @@
+var Jamamoji = require( '../models/jamamoji' );
+var MainView = require( './MainView' );
+
 var SignUpView = function() {
   this.url = 'http://localhost:5000/users/sign_up.json'
 }
@@ -8,14 +11,28 @@ SignUpView.prototype = {
     var email = document.createElement( 'input' );
     var password = document.createElement( 'input' );
     var confirmPassword = document.createElement( 'input' );
+    var petName = document.createElement( 'input' );
+    var pickIcon = document.createElement( 'select' );
     var button = document.createElement( 'button' );
+
+    var icons = [ "Pick a face...", "😀", "😬", "😂", "😃", "😇", "😉", "😊", "🙃", "😋", "😍", "😜", "🤓", "😎", "😏", "🤔", "😡", "😩", "🤐" ];
+
+    for( var i = 0; i < icons.length; i++ ) {
+      var icon = document.createElement( 'option' );
+      console.log( icons[i] );
+      icon.innerText = icons[i];
+      pickIcon.appendChild( icon );
+    }
+
+    pickIcon.id = 'icon';
+    space.appendChild( pickIcon );
 
     button.onclick = function() {
       var emailInput = document.getElementById( 'email' );
       var passwordInput = document.getElementById( 'password' );
       var confirmPasswordInput = document.getElementById( 'confirmPassword' );
-      console.log( emailInput.value );
-      console.log( passwordInput.value );
+      var nameInput = document.getElementById( 'name' );
+      var iconInput = document.getElementById( 'icon')
 
       var request = new XMLHttpRequest()
       request.open( 'POST', this.url )
@@ -33,7 +50,10 @@ SignUpView.prototype = {
           password_confirmation: confirmPasswordInput.value
         }
       }
-      request.send( JSON.stringify( data ))
+      request.send( JSON.stringify( data ));
+      var pet = new Jamamoji( nameInput.value, icon.value );
+      var view = new MainView( pet );
+      view.display();
     }.bind( this );
 
     email.type = 'text';
@@ -48,11 +68,20 @@ SignUpView.prototype = {
     confirmPassword.placeholder = 'Confirm Password..';
     confirmPassword.id = 'confirmPassword';
 
+    petName.type = 'text';
+    petName.placeholder = "Name your Jamamoji..."
+    petName.id = 'name';
+
+    button.innerText = "Ok";
+
+    space.appendChild( petName );
     space.appendChild( email );
     space.appendChild( password );
     space.appendChild( confirmPassword );
     space.appendChild( button );
+  },
 
+  createPet: function() {
 
   },
 }
