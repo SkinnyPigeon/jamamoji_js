@@ -35,6 +35,7 @@ Jamamoji.prototype = {
       if( this.icon === this.originalIcon ) {
         this.happyCount += 1;
         this.checkForLevels();
+        console.log( this.happyCount );
       }
     }.bind( this ), 120000 )
   },

@@ -7,7 +7,7 @@ var SignUpView = function() {
 
 SignUpView.prototype = {
   display: function() {
-    var space = document.getElementById( 'login-view' );
+    var space = document.getElementById( 'signup-view' );
     var email = document.createElement( 'input' );
     var password = document.createElement( 'input' );
     var confirmPassword = document.createElement( 'input' );
@@ -19,7 +19,6 @@ SignUpView.prototype = {
 
     for( var i = 0; i < icons.length; i++ ) {
       var icon = document.createElement( 'option' );
-      console.log( icons[i] );
       icon.innerText = icons[i];
       pickIcon.appendChild( icon );
     }

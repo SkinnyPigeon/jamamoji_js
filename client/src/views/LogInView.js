@@ -24,8 +24,8 @@ LogInView.prototype = {
       request.onload = () => {
         if( request.status === 201 ) {
           var user = JSON.parse( request.responseText );
-          console.log( user );
           this.showJamamoji( user );
+          this.hide();
         }
       }
       var data = {
@@ -34,7 +34,6 @@ LogInView.prototype = {
           password: passwordInput.value,
         }
       }
-      console.log( data );
       request.send( JSON.stringify( data ))
     }.bind( this );
 
@@ -55,6 +54,11 @@ LogInView.prototype = {
     var jamamojiView = new JamamojiView( user );
     jamamojiView.getJamamoji();
   },
+
+  hide: function() {
+    var space = document.getElementById( 'login-view' );
+    space.style.display = 'none';
+  }
 
 
 }

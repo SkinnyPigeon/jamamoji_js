@@ -2,13 +2,29 @@
 <html>
   <head>
     <title>Startpoint</title>
+
+    <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBiOcuVu4sLZKlWMmIKWEsSmtybIYj7b1w",
+        authDomain: "jamamoji.firebaseapp.com",
+        databaseURL: "https://jamamoji.firebaseio.com",
+        storageBucket: "",
+        messagingSenderId: "55596989968"
+      };
+      firebase.initializeApp(config);
+    </script>
     <script src='bundle.js'></script>
     <link rel="stylesheet" type="text/css" href="main.css">
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
+
   </head>
   <body>
 
     <div id='login-view'></div>
+    <div id='logout-view'></div>
+    <div id='signup-view'></div>
     <div id="clean-poop"></div>
     <div id="give-food"></div>
     <div id="give-medicine"></div>

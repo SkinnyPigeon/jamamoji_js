@@ -6,19 +6,21 @@ var SignOutView = function( pet ) {
 SignOutView.prototype = {
 
   display: function() {
-    var space = document.getElementById( 'login-view' );
+    var space = document.getElementById( 'logout-view' );
     var button = document.createElement( 'button' );
     button.innerText = 'Sign Out...';
     space.appendChild( button );
 
     button.onclick = function() {
       this.updatePet();
+      displayLogIn();
       var request = new XMLHttpRequest();
       request.open( 'DELETE', this.url );
       request.setRequestHeader( "Content-type", "application/json" );
       request.withCredentials = true;
       request.onload = () => {
         if( request.status === 204 ) {
+          location.reload();
         }
       }
       request.send( null );
@@ -33,8 +35,6 @@ SignOutView.prototype = {
     request.setRequestHeader( "Content-type", "application/json" );
     request.withCredentials = true;
     request.onload = () => {
-      console.log( "sending" );
-      
     }
     var data = {
       jamamoji : {
@@ -58,10 +58,16 @@ SignOutView.prototype = {
     }
     console.log( data );
     request.send( JSON.stringify( data ));
-  }
+  },
 
 
+}
 
+var displayLogIn = function() {
+  var view = document.getElementById( 'login-view' );
+  view.style.display = 'block';
+  var space = document.getElementById( 'logout-view' );
+  space.style.display = 'none';
 }
 
 module.exports = SignOutView;

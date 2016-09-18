@@ -98,8 +98,8 @@
 	      request.onload = () => {
 	        if( request.status === 201 ) {
 	          var user = JSON.parse( request.responseText );
-	          console.log( user );
 	          this.showJamamoji( user );
+	          this.hide();
 	        }
 	      }
 	      var data = {
@@ -108,7 +108,6 @@
 	          password: passwordInput.value,
 	        }
 	      }
-	      console.log( data );
 	      request.send( JSON.stringify( data ))
 	    }.bind( this );
 	
@@ -129,6 +128,11 @@
 	    var jamamojiView = new JamamojiView( user );
 	    jamamojiView.getJamamoji();
 	  },
+	
+	  hide: function() {
+	    var space = document.getElementById( 'login-view' );
+	    space.style.display = 'none';
+	  }
 	
 	
 	}
@@ -219,7 +223,7 @@
 	
 	SignUpView.prototype = {
 	  display: function() {
-	    var space = document.getElementById( 'login-view' );
+	    var space = document.getElementById( 'signup-view' );
 	    var email = document.createElement( 'input' );
 	    var password = document.createElement( 'input' );
 	    var confirmPassword = document.createElement( 'input' );
@@ -231,7 +235,6 @@
 	
 	    for( var i = 0; i < icons.length; i++ ) {
 	      var icon = document.createElement( 'option' );
-	      console.log( icons[i] );
 	      icon.innerText = icons[i];
 	      pickIcon.appendChild( icon );
 	    }
@@ -312,19 +315,21 @@
 	SignOutView.prototype = {
 	
 	  display: function() {
-	    var space = document.getElementById( 'login-view' );
+	    var space = document.getElementById( 'logout-view' );
 	    var button = document.createElement( 'button' );
 	    button.innerText = 'Sign Out...';
 	    space.appendChild( button );
 	
 	    button.onclick = function() {
 	      this.updatePet();
+	      displayLogIn();
 	      var request = new XMLHttpRequest();
 	      request.open( 'DELETE', this.url );
 	      request.setRequestHeader( "Content-type", "application/json" );
 	      request.withCredentials = true;
 	      request.onload = () => {
 	        if( request.status === 204 ) {
+	          location.reload();
 	        }
 	      }
 	      request.send( null );
@@ -339,8 +344,6 @@
 	    request.setRequestHeader( "Content-type", "application/json" );
 	    request.withCredentials = true;
 	    request.onload = () => {
-	      console.log( "sending" );
-	      
 	    }
 	    var data = {
 	      jamamoji : {
@@ -364,10 +367,16 @@
 	    }
 	    console.log( data );
 	    request.send( JSON.stringify( data ));
-	  }
+	  },
 	
 	
+	}
 	
+	var displayLogIn = function() {
+	  var view = document.getElementById( 'login-view' );
+	  view.style.display = 'block';
+	  var space = document.getElementById( 'logout-view' );
+	  space.style.display = 'none';
 	}
 	
 	module.exports = SignOutView;
@@ -413,6 +422,7 @@
 	      if( this.icon === this.originalIcon ) {
 	        this.happyCount += 1;
 	        this.checkForLevels();
+	        console.log( this.happyCount );
 	      }
 	    }.bind( this ), 120000 )
 	  },
