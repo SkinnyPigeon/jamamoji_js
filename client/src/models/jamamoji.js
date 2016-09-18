@@ -265,21 +265,6 @@ Jamamoji.prototype = {
   resume: function() {
     this.pause = false;
   }
-
 }
 
 module.exports = Jamamoji;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
