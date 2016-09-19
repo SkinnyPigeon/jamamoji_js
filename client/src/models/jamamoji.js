@@ -37,7 +37,7 @@ Jamamoji.prototype = {
         this.checkForLevels();
         console.log( this.happyCount );
       }
-    }.bind( this ), 120000 )
+    }.bind( this ), 1200 )
   },
 
   checkForLevels: function() {
@@ -95,7 +95,7 @@ Jamamoji.prototype = {
       }
       var total = this.food.length;
       this.digest( total );
-    }.bind( this ), 600000)
+    }.bind( this ), 6000)
   },
 
   digest: function( total ) {
@@ -124,7 +124,7 @@ Jamamoji.prototype = {
     setTimeout( function() {
       var plop = new Poop();
       this.waste.push( plop );
-    }.bind( this ) , 600000)
+    }.bind( this ) , 6000)
     return;
   },
 
@@ -138,7 +138,7 @@ Jamamoji.prototype = {
     setTimeout( function() {
       var plop = new Poop();
       this.waste.push( plop );
-    }.bind( this ) , 600000)
+    }.bind( this ) , 6000)
     return;
   },
 
