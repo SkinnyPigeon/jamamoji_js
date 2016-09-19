@@ -13,6 +13,7 @@
     "webpack": "^1.13.2"
   },
   "dependencies": {
+    "firebase": "^3.4.0",
     "lodash": "^4.15.0"
   }
 }
