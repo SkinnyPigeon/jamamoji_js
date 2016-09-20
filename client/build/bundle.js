@@ -46,7 +46,6 @@
 
 	var LogInView = __webpack_require__( 1 );
 	var SignUpView = __webpack_require__( 14 );
-	// var SignOutView = require( './views/SignOutView' );
 	
 	window.onload = function() {
 	  main();
@@ -55,7 +54,6 @@
 	var main = function() {
 	  displayLogIn();
 	  displaySignUp();
-	  // displayLogout();
 	}
 	
 	var displayLogIn = function() {
@@ -67,12 +65,6 @@
 	  var view = new SignUpView();
 	  view.display();
 	}
-	
-	// var displayLogout = function() {
-	//   var view = new SignOutView();
-	//   view.display();
-	// }
-	
 
 
 /***/ },
@@ -18002,12 +17994,30 @@
 	SignUpView.prototype = {
 	  display: function() {
 	    var space = document.getElementById( 'signup-view' );
-	    var emailInput = document.createElement( 'input' );
-	    var passwordInput = document.createElement( 'input' );
+	    var signUpEmailInput = document.createElement( 'input' );
+	    var signUpPasswordInput = document.createElement( 'input' );
 	    var confirmPassword = document.createElement( 'input' );
 	    var petName = document.createElement( 'input' );
 	    var pickIcon = document.createElement( 'select' );
 	    var button = document.createElement( 'button' );
+	
+	    signUpEmailInput.type = 'text';
+	    signUpEmailInput.placeholder = 'Email...';
+	    signUpEmailInput.id = 'signUpEmail';
+	
+	    signUpPasswordInput.type = 'password';
+	    signUpPasswordInput.placeholder = 'Password..';
+	    signUpPasswordInput.id = 'signUpPassword';
+	
+	    confirmPassword.type = 'password';
+	    confirmPassword.placeholder = 'Confirm Password..';
+	    confirmPassword.id = 'confirmPassword';
+	
+	    petName.type = 'text';
+	    petName.placeholder = "Name your Jamamoji..."
+	    petName.id = 'name';
+	
+	    button.innerText = "Ok";
 	
 	    var icons = [ "Pick a face...", "😀", "😬", "😂", "😃", "😇", "😉", "😊", "🙃", "😋", "😍", "😜", "🤓", "😎", "😏", "🤔", "😡", "😩", "🤐" ];
 	
@@ -18021,15 +18031,11 @@
 	    space.appendChild( pickIcon );
 	
 	    button.onclick = function() {
-	      var emailInput = document.getElementById( 'email' );
-	      var passwordInput = document.getElementById( 'password' );
+	      var email = document.getElementById( 'signUpEmail' );
+	      var password = document.getElementById( 'signUpPassword' );
 	      var confirmPassword = document.getElementById( 'confirmPassword' );
 	      var nameInput = document.getElementById( 'name' );
 	      var iconInput = document.getElementById( 'icon')
-	
-	      console.log( confirmPassword.value );
-	      console.log( password.value );
-	      console.log( email.value );
 	
 	      var request = new XMLHttpRequest()
 	      request.open( 'POST', this.url )
@@ -18039,40 +18045,25 @@
 	        if( request.status === 201 ) {
 	          var user = JSON.parse( request.responseText )
 	          console.log( user );
+	          var pet = new Jamamoji( nameInput.value, icon.value );
+	          this.savePet(pet, user);
+	          var view = new MainView( pet );
+	          view.display();
 	        }
 	      }
 	      var data = {
 	        user: {
-	          email: email.value,
-	          password: passwordInput.value,
+	          email: signUpEmail.value,
+	          password: signUpPasswordInput.value,
 	          password_confirmation: confirmPassword.value
 	        }
 	      }
 	      console.log( data );
-	      // request.send( JSON.stringify( data ));
-	      // var pet = new Jamamoji( nameInput.value, icon.value );
-	      // this.savePet( pet );
-	      var view = new MainView( pet );
-	      view.display();
+	      request.send( JSON.stringify( data ));
+	
 	    }.bind( this );
 	
-	    emailInput.type = 'text';
-	    emailInput.placeholder = 'Email...';
-	    emailInput.id = 'email';
 	
-	    passwordInput.type = 'password';
-	    passwordInput.placeholder = 'Password..';
-	    passwordInput.id = 'password';
-	
-	    confirmPassword.type = 'password';
-	    confirmPassword.placeholder = 'Confirm Password..';
-	    confirmPassword.id = 'confirmPassword';
-	
-	    petName.type = 'text';
-	    petName.placeholder = "Name your Jamamoji..."
-	    petName.id = 'name';
-	
-	    button.innerText = "Ok";
 	
 	    var backButton = document.createElement( 'button' );
 	    backButton.innerText = "Back..."
@@ -18084,8 +18075,8 @@
 	    }
 	
 	    space.appendChild( petName );
-	    space.appendChild( emailInput );
-	    space.appendChild( passwordInput );
+	    space.appendChild( signUpEmailInput );
+	    space.appendChild( signUpPasswordInput );
 	    space.appendChild( confirmPassword );
 	    space.appendChild( button );
 	    space.appendChild( backButton );
@@ -18093,8 +18084,8 @@
 	    space.style.display = 'none';
 	  },
 	
-	  savePet: function( pet ) {
-	    var url = "http://"
+	  savePet: function( pet, user ) {
+	    var url = "http://localhost:5000/api/jamamojis.json"
 	    var request = new XMLHttpRequest()
 	    request.open( 'POST', url )
 	    request.setRequestHeader( "Content-type", "application/json" )
@@ -18122,7 +18113,8 @@
 	        block: pet.block,
 	        opponent_special: pet.opponent_special,
 	        level: pet.level,
-	        happy_count: pet.happyCount
+	        happy_count: pet.happyCount,
+	        user_id: user.id
 	      }
 	    }
 	    request.send( JSON.stringify( data ));
