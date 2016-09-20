@@ -8,6 +8,7 @@ var JamamojiView = function( user ) {
 
 JamamojiView.prototype = {
   getJamamoji: function() {
+
     var request = new XMLHttpRequest();
     request.open( 'GET', this.url );
     request.setRequestHeader( "Content-type", "application/json" );
@@ -22,7 +23,12 @@ JamamojiView.prototype = {
   },
 
   pickJamamoji: function( jamamojis ) {
+
     for( var i = 0; i < jamamojis.length; i++ ) {
+
+    console.log( this.user.id );
+    console.log( jamamojis );
+
       if( jamamojis[i].user_id === this.user.id ) {
         this.makeJamamoji( jamamojis[i] );
       }
@@ -30,6 +36,7 @@ JamamojiView.prototype = {
   },
 
   makeJamamoji: function( jamamoji ) {
+
     var pet = new Jamamoji( jamamoji.name, jamamoji.icon );
     pet.id = jamamoji.id;
     pet.alive = jamamoji.alive;

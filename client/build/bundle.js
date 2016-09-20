@@ -46,6 +46,7 @@
 
 	var LogInView = __webpack_require__( 1 );
 	var SignUpView = __webpack_require__( 14 );
+	// var SignOutView = require( './views/SignOutView' );
 	
 	window.onload = function() {
 	  main();
@@ -54,6 +55,7 @@
 	var main = function() {
 	  displayLogIn();
 	  displaySignUp();
+	  // displayLogout();
 	}
 	
 	var displayLogIn = function() {
@@ -65,6 +67,11 @@
 	  var view = new SignUpView();
 	  view.display();
 	}
+	
+	// var displayLogout = function() {
+	//   var view = new SignOutView();
+	//   view.display();
+	// }
 	
 
 
@@ -98,6 +105,7 @@
 	    }
 	
 	    button.onclick = function() {
+	
 	      var emailInput = document.getElementById( 'email' );
 	      var passwordInput = document.getElementById( 'password' );
 	
@@ -108,6 +116,7 @@
 	      request.onload = () => {
 	        if( request.status === 201 ) {
 	          var user = JSON.parse( request.responseText );
+	
 	          this.showJamamoji( user );
 	          this.hide();
 	        }
@@ -137,6 +146,7 @@
 	
 	  showJamamoji: function( user ) {
 	    var jamamojiView = new JamamojiView( user );
+	    
 	    jamamojiView.getJamamoji();
 	  },
 	
@@ -164,6 +174,7 @@
 	
 	JamamojiView.prototype = {
 	  getJamamoji: function() {
+	
 	    var request = new XMLHttpRequest();
 	    request.open( 'GET', this.url );
 	    request.setRequestHeader( "Content-type", "application/json" );
@@ -178,7 +189,12 @@
 	  },
 	
 	  pickJamamoji: function( jamamojis ) {
+	
 	    for( var i = 0; i < jamamojis.length; i++ ) {
+	
+	    console.log( this.user.id );
+	    console.log( jamamojis );
+	
 	      if( jamamojis[i].user_id === this.user.id ) {
 	        this.makeJamamoji( jamamojis[i] );
 	      }
@@ -186,6 +202,7 @@
 	  },
 	
 	  makeJamamoji: function( jamamoji ) {
+	
 	    var pet = new Jamamoji( jamamoji.name, jamamoji.icon );
 	    pet.id = jamamoji.id;
 	    pet.alive = jamamoji.alive;
@@ -17332,7 +17349,7 @@
 	      var space = document.getElementById( 'icon-place' );
 	      space.innerText = "";
 	      var signOut = document.getElementById( 'logout-view' );
-	      signOut.style.display = 'none';
+	      // signOut.style.display = 'none';
 	      this.pet.pause = true;
 	      this.haveFight( this.pet, this.icons );
 	    }.bind( this );
@@ -17452,7 +17469,7 @@
 	  var view = document.getElementById( 'login-view' );
 	  view.style.display = 'block';
 	  var space = document.getElementById( 'logout-view' );
-	  space.style.display = 'none';
+	  // space.style.display = 'none';
 	}
 	
 	module.exports = SignOutView;
@@ -17979,14 +17996,14 @@
 	var MainView = __webpack_require__( 8 );
 	
 	var SignUpView = function() {
-	  this.url = 'http://localhost:5000/users/sign_up.json'
+	  this.url = 'http://localhost:5000/users.json'
 	}
 	
 	SignUpView.prototype = {
 	  display: function() {
 	    var space = document.getElementById( 'signup-view' );
-	    var email = document.createElement( 'input' );
-	    var password = document.createElement( 'input' );
+	    var emailInput = document.createElement( 'input' );
+	    var passwordInput = document.createElement( 'input' );
 	    var confirmPassword = document.createElement( 'input' );
 	    var petName = document.createElement( 'input' );
 	    var pickIcon = document.createElement( 'select' );
@@ -18006,9 +18023,13 @@
 	    button.onclick = function() {
 	      var emailInput = document.getElementById( 'email' );
 	      var passwordInput = document.getElementById( 'password' );
-	      var confirmPasswordInput = document.getElementById( 'confirmPassword' );
+	      var confirmPassword = document.getElementById( 'confirmPassword' );
 	      var nameInput = document.getElementById( 'name' );
 	      var iconInput = document.getElementById( 'icon')
+	
+	      console.log( confirmPassword.value );
+	      console.log( password.value );
+	      console.log( email.value );
 	
 	      var request = new XMLHttpRequest()
 	      request.open( 'POST', this.url )
@@ -18017,28 +18038,31 @@
 	      request.onload = () => {
 	        if( request.status === 201 ) {
 	          var user = JSON.parse( request.responseText )
+	          console.log( user );
 	        }
 	      }
 	      var data = {
 	        user: {
-	          email: emailInput.value,
+	          email: email.value,
 	          password: passwordInput.value,
-	          password_confirmation: confirmPasswordInput.value
+	          password_confirmation: confirmPassword.value
 	        }
 	      }
-	      request.send( JSON.stringify( data ));
-	      var pet = new Jamamoji( nameInput.value, icon.value );
+	      console.log( data );
+	      // request.send( JSON.stringify( data ));
+	      // var pet = new Jamamoji( nameInput.value, icon.value );
+	      // this.savePet( pet );
 	      var view = new MainView( pet );
 	      view.display();
 	    }.bind( this );
 	
-	    email.type = 'text';
-	    email.placeholder = 'Email...';
-	    email.id = 'email';
+	    emailInput.type = 'text';
+	    emailInput.placeholder = 'Email...';
+	    emailInput.id = 'email';
 	
-	    password.type = 'password';
-	    password.placeholder = 'Password..';
-	    password.id = 'password';
+	    passwordInput.type = 'password';
+	    passwordInput.placeholder = 'Password..';
+	    passwordInput.id = 'password';
 	
 	    confirmPassword.type = 'password';
 	    confirmPassword.placeholder = 'Confirm Password..';
@@ -18060,8 +18084,8 @@
 	    }
 	
 	    space.appendChild( petName );
-	    space.appendChild( email );
-	    space.appendChild( password );
+	    space.appendChild( emailInput );
+	    space.appendChild( passwordInput );
 	    space.appendChild( confirmPassword );
 	    space.appendChild( button );
 	    space.appendChild( backButton );
@@ -18069,8 +18093,39 @@
 	    space.style.display = 'none';
 	  },
 	
-	  createPet: function() {
-	
+	  savePet: function( pet ) {
+	    var url = "http://"
+	    var request = new XMLHttpRequest()
+	    request.open( 'POST', url )
+	    request.setRequestHeader( "Content-type", "application/json" )
+	    request.withCredentials = true
+	    request.onload = () => {
+	      if( request.status === 201 ) {
+	        var jamamoji = JSON.parse( request.responseText )
+	      }
+	    }
+	    var data = {
+	      jamamoji : {
+	        name: pet.name,
+	        icon: pet.icon,
+	        food: pet.food.length,
+	        energy: pet.energy,
+	        waste: pet.waste.length,
+	        alive: pet.alive,
+	        ill: pet.ill,
+	        happy: pet.happy,
+	        hungry: pet.hungry,
+	        damage: pet.damage,
+	        health: pet.health,
+	        special: pet.special,
+	        opponent_bounus: pet.opponent_bonus,
+	        block: pet.block,
+	        opponent_special: pet.opponent_special,
+	        level: pet.level,
+	        happy_count: pet.happyCount
+	      }
+	    }
+	    request.send( JSON.stringify( data ));
 	  },
 	}
 	

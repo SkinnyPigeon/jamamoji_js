@@ -72,7 +72,7 @@ MainView.prototype = {
       var space = document.getElementById( 'icon-place' );
       space.innerText = "";
       var signOut = document.getElementById( 'logout-view' );
-      signOut.style.display = 'none';
+      // signOut.style.display = 'none';
       this.pet.pause = true;
       this.haveFight( this.pet, this.icons );
     }.bind( this );

@@ -2,14 +2,14 @@ var Jamamoji = require( '../models/jamamoji' );
 var MainView = require( './MainView' );
 
 var SignUpView = function() {
-  this.url = 'http://localhost:5000/users/sign_up.json'
+  this.url = 'http://localhost:5000/users.json'
 }
 
 SignUpView.prototype = {
   display: function() {
     var space = document.getElementById( 'signup-view' );
-    var email = document.createElement( 'input' );
-    var password = document.createElement( 'input' );
+    var emailInput = document.createElement( 'input' );
+    var passwordInput = document.createElement( 'input' );
     var confirmPassword = document.createElement( 'input' );
     var petName = document.createElement( 'input' );
     var pickIcon = document.createElement( 'select' );
@@ -29,9 +29,13 @@ SignUpView.prototype = {
     button.onclick = function() {
       var emailInput = document.getElementById( 'email' );
       var passwordInput = document.getElementById( 'password' );
-      var confirmPasswordInput = document.getElementById( 'confirmPassword' );
+      var confirmPassword = document.getElementById( 'confirmPassword' );
       var nameInput = document.getElementById( 'name' );
       var iconInput = document.getElementById( 'icon')
+
+      console.log( confirmPassword.value );
+      console.log( password.value );
+      console.log( email.value );
 
       var request = new XMLHttpRequest()
       request.open( 'POST', this.url )
@@ -40,28 +44,31 @@ SignUpView.prototype = {
       request.onload = () => {
         if( request.status === 201 ) {
           var user = JSON.parse( request.responseText )
+          console.log( user );
         }
       }
       var data = {
         user: {
-          email: emailInput.value,
+          email: email.value,
           password: passwordInput.value,
-          password_confirmation: confirmPasswordInput.value
+          password_confirmation: confirmPassword.value
         }
       }
-      request.send( JSON.stringify( data ));
-      var pet = new Jamamoji( nameInput.value, icon.value );
+      console.log( data );
+      // request.send( JSON.stringify( data ));
+      // var pet = new Jamamoji( nameInput.value, icon.value );
+      // this.savePet( pet );
       var view = new MainView( pet );
       view.display();
     }.bind( this );
 
-    email.type = 'text';
-    email.placeholder = 'Email...';
-    email.id = 'email';
+    emailInput.type = 'text';
+    emailInput.placeholder = 'Email...';
+    emailInput.id = 'email';
 
-    password.type = 'password';
-    password.placeholder = 'Password..';
-    password.id = 'password';
+    passwordInput.type = 'password';
+    passwordInput.placeholder = 'Password..';
+    passwordInput.id = 'password';
 
     confirmPassword.type = 'password';
     confirmPassword.placeholder = 'Confirm Password..';
@@ -83,8 +90,8 @@ SignUpView.prototype = {
     }
 
     space.appendChild( petName );
-    space.appendChild( email );
-    space.appendChild( password );
+    space.appendChild( emailInput );
+    space.appendChild( passwordInput );
     space.appendChild( confirmPassword );
     space.appendChild( button );
     space.appendChild( backButton );
@@ -92,8 +99,39 @@ SignUpView.prototype = {
     space.style.display = 'none';
   },
 
-  createPet: function() {
-
+  savePet: function( pet ) {
+    var url = "http://"
+    var request = new XMLHttpRequest()
+    request.open( 'POST', url )
+    request.setRequestHeader( "Content-type", "application/json" )
+    request.withCredentials = true
+    request.onload = () => {
+      if( request.status === 201 ) {
+        var jamamoji = JSON.parse( request.responseText )
+      }
+    }
+    var data = {
+      jamamoji : {
+        name: pet.name,
+        icon: pet.icon,
+        food: pet.food.length,
+        energy: pet.energy,
+        waste: pet.waste.length,
+        alive: pet.alive,
+        ill: pet.ill,
+        happy: pet.happy,
+        hungry: pet.hungry,
+        damage: pet.damage,
+        health: pet.health,
+        special: pet.special,
+        opponent_bounus: pet.opponent_bonus,
+        block: pet.block,
+        opponent_special: pet.opponent_special,
+        level: pet.level,
+        happy_count: pet.happyCount
+      }
+    }
+    request.send( JSON.stringify( data ));
   },
 }
 

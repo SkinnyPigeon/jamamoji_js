@@ -68,7 +68,7 @@ var displayLogIn = function() {
   var view = document.getElementById( 'login-view' );
   view.style.display = 'block';
   var space = document.getElementById( 'logout-view' );
-  space.style.display = 'none';
+  // space.style.display = 'none';
 }
 
 module.exports = SignOutView;
