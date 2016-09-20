@@ -2,9 +2,13 @@ var _ = require( 'lodash' )
 var Poop = require( './poop' )
 var Food = require( './food' );
 
-var Jamamoji = function( name, icon ) {
+var Jamamoji = function( name, icon, originalIcon ) {
   this.id = null;
-  this.originalIcon = icon;
+  this.originalIcon = originalIcon;
+  if( this.originalIcon === undefined && this.icon !== "😷" && this.icon !== "😒" ) {
+    this.originalIcon = icon;
+  }
+  console.log( this.originalIcon );
   this.name = name;
   this.icon = icon;
   this.food = [];
@@ -22,6 +26,7 @@ var Jamamoji = function( name, icon ) {
   this.opponentSpecial = 3;
   this.level = 1;
   this.happyCount = 0;
+  this.foodCount = 0;
   this.pause = false;
 }
 
@@ -35,7 +40,6 @@ Jamamoji.prototype = {
       if( this.icon === this.originalIcon ) {
         this.happyCount += 1;
         this.checkForLevels();
-        console.log( this.happyCount );
       }
     }.bind( this ), 1200 )
   },
@@ -49,6 +53,28 @@ Jamamoji.prototype = {
       this.energy *= 1.1;
     }
   },
+
+  checkForFoodAndWasteLevels: function() {
+    if( this.foodCount % 5 === 0 ) {
+      var total = this.food.length;
+      this.digest( total );
+    }
+  },
+
+  hunger: function() {
+    setInterval( function() {
+      if( this.checkDead() ) {
+        return;
+      }
+      if( this.pause ) {
+        return;
+      }
+      this.foodCount += 1;
+      this.checkForFoodAndWasteLevels();
+    }.bind( this ), 1200)
+  },
+
+
 
   eatAtStartUp: function() {
     var burger = new Food();
@@ -85,18 +111,7 @@ Jamamoji.prototype = {
     return food.join("");
   },
   
-  hunger: function() {
-    if( this.checkDead() ) {
-      return;
-    }
-    setInterval( function() {
-      if( this.pause ) {
-        return;
-      }
-      var total = this.food.length;
-      this.digest( total );
-    }.bind( this ), 6000)
-  },
+
 
   digest: function( total ) {
     if( this.pause ) {

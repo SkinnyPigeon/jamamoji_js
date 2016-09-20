@@ -194,10 +194,10 @@
 	  },
 	
 	  makeJamamoji: function( jamamoji ) {
-	
-	    var pet = new Jamamoji( jamamoji.name, jamamoji.icon );
+	    var pet = new Jamamoji( jamamoji.name, jamamoji.icon, jamamoji.original_icon );
 	    pet.id = jamamoji.id;
 	    pet.alive = jamamoji.alive;
+	    pet.originalIcon = jamamoji.original_icon;
 	    pet.block = jamamoji.block;
 	    pet.damage = jamamoji.damage;
 	    pet.energy = jamamoji.energy;
@@ -208,6 +208,7 @@
 	    pet.opponentSpecial = jamamoji.opponent_special;
 	    pet.special = jamamoji.special;
 	    pet.happyCount = jamamoji.happy_count;
+	    pet.foodCount = jamamoji.food_count;
 	    this.fillPet( pet, jamamoji );
 	  },
 	
@@ -237,9 +238,13 @@
 	var Poop = __webpack_require__( 6 )
 	var Food = __webpack_require__( 7 );
 	
-	var Jamamoji = function( name, icon ) {
+	var Jamamoji = function( name, icon, originalIcon ) {
 	  this.id = null;
-	  this.originalIcon = icon;
+	  this.originalIcon = originalIcon;
+	  if( this.originalIcon === undefined && this.icon !== "😷" && this.icon !== "😒" ) {
+	    this.originalIcon = icon;
+	  }
+	  console.log( this.originalIcon );
 	  this.name = name;
 	  this.icon = icon;
 	  this.food = [];
@@ -257,6 +262,7 @@
 	  this.opponentSpecial = 3;
 	  this.level = 1;
 	  this.happyCount = 0;
+	  this.foodCount = 0;
 	  this.pause = false;
 	}
 	
@@ -270,7 +276,6 @@
 	      if( this.icon === this.originalIcon ) {
 	        this.happyCount += 1;
 	        this.checkForLevels();
-	        console.log( this.happyCount );
 	      }
 	    }.bind( this ), 1200 )
 	  },
@@ -284,6 +289,28 @@
 	      this.energy *= 1.1;
 	    }
 	  },
+	
+	  checkForFoodAndWasteLevels: function() {
+	    if( this.foodCount % 5 === 0 ) {
+	      var total = this.food.length;
+	      this.digest( total );
+	    }
+	  },
+	
+	  hunger: function() {
+	    setInterval( function() {
+	      if( this.checkDead() ) {
+	        return;
+	      }
+	      if( this.pause ) {
+	        return;
+	      }
+	      this.foodCount += 1;
+	      this.checkForFoodAndWasteLevels();
+	    }.bind( this ), 1200)
+	  },
+	
+	
 	
 	  eatAtStartUp: function() {
 	    var burger = new Food();
@@ -320,18 +347,7 @@
 	    return food.join("");
 	  },
 	  
-	  hunger: function() {
-	    if( this.checkDead() ) {
-	      return;
-	    }
-	    setInterval( function() {
-	      if( this.pause ) {
-	        return;
-	      }
-	      var total = this.food.length;
-	      this.digest( total );
-	    }.bind( this ), 6000)
-	  },
+	
 	
 	  digest: function( total ) {
 	    if( this.pause ) {
@@ -17429,6 +17445,7 @@
 	    request.setRequestHeader( "Content-type", "application/json" );
 	    request.withCredentials = true;
 	    request.onload = () => {
+	      console.log( pet )
 	    }
 	    var data = {
 	      jamamoji : {
@@ -17448,7 +17465,9 @@
 	        block: this.pet.block,
 	        opponent_special: this.pet.opponent_special,
 	        level: this.pet.level,
-	        happy_count: this.pet.happyCount
+	        happy_count: this.pet.happyCount,
+	        food_count: this.pet.foodCount,
+	        original_icon: this.pet.originalIcon
 	      }
 	    }
 	    request.send( JSON.stringify( data ));
@@ -18099,6 +18118,7 @@
 	      jamamoji : {
 	        name: pet.name,
 	        icon: pet.icon,
+	        original_icon: pet.icon,
 	        food: pet.food.length,
 	        energy: pet.energy,
 	        waste: pet.waste.length,

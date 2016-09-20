@@ -36,6 +36,7 @@ SignOutView.prototype = {
     request.setRequestHeader( "Content-type", "application/json" );
     request.withCredentials = true;
     request.onload = () => {
+      console.log( pet )
     }
     var data = {
       jamamoji : {
@@ -55,7 +56,9 @@ SignOutView.prototype = {
         block: this.pet.block,
         opponent_special: this.pet.opponent_special,
         level: this.pet.level,
-        happy_count: this.pet.happyCount
+        happy_count: this.pet.happyCount,
+        food_count: this.pet.foodCount,
+        original_icon: this.pet.originalIcon
       }
     }
     request.send( JSON.stringify( data ));

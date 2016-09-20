@@ -36,10 +36,10 @@ JamamojiView.prototype = {
   },
 
   makeJamamoji: function( jamamoji ) {
-
-    var pet = new Jamamoji( jamamoji.name, jamamoji.icon );
+    var pet = new Jamamoji( jamamoji.name, jamamoji.icon, jamamoji.original_icon );
     pet.id = jamamoji.id;
     pet.alive = jamamoji.alive;
+    pet.originalIcon = jamamoji.original_icon;
     pet.block = jamamoji.block;
     pet.damage = jamamoji.damage;
     pet.energy = jamamoji.energy;
@@ -50,6 +50,7 @@ JamamojiView.prototype = {
     pet.opponentSpecial = jamamoji.opponent_special;
     pet.special = jamamoji.special;
     pet.happyCount = jamamoji.happy_count;
+    pet.foodCount = jamamoji.food_count;
     this.fillPet( pet, jamamoji );
   },
 

@@ -113,6 +113,7 @@ SignUpView.prototype = {
       jamamoji : {
         name: pet.name,
         icon: pet.icon,
+        original_icon: pet.icon,
         food: pet.food.length,
         energy: pet.energy,
         waste: pet.waste.length,
