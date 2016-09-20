@@ -23,12 +23,7 @@ JamamojiView.prototype = {
   },
 
   pickJamamoji: function( jamamojis ) {
-
     for( var i = 0; i < jamamojis.length; i++ ) {
-
-    console.log( this.user.id );
-    console.log( jamamojis );
-
       if( jamamojis[i].user_id === this.user.id ) {
         this.makeJamamoji( jamamojis[i] );
       }
@@ -52,6 +47,7 @@ JamamojiView.prototype = {
     pet.happyCount = jamamoji.happy_count;
     pet.foodCount = jamamoji.food_count;
     this.fillPet( pet, jamamoji );
+    pet.level = jamamoji.level;
   },
 
   fillPet: function( newPet, storedPet ) {

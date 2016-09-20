@@ -38,20 +38,47 @@ Jamamoji.prototype = {
         return;
       }
       if( this.icon === this.originalIcon ) {
+        console.log( this.happyCount );
         this.happyCount += 1;
+        this.checkForLevels();
+      } else if( this.icon !== this.originalIcon ) {
+        console.log( this.happyCount );
+        this.happyCount -= 1;
         this.checkForLevels();
       }
     }.bind( this ), 1200 )
   },
 
   checkForLevels: function() {
-    if( this.happyCount % 10 === 0 ) {
-      this.level += 1;
+    if( this.happyCount > 0 ) {
+      if( this.happyCount % 10 === 0 ) {
+        console.log( this.happyCount );
+        this.level += 1;
+      }
+      if( this.level % 5 === 0 ) {
+        this.health *= 1.01;
+        this.health = Math.floor( this.health );
+        this.energy *= 1.01;
+        this.energy = Math.floor( this.energy );
+        this.special *= 1.01;
+        this.energy = Math.floor( this.energy );
+      }
+    } else {
+      if( this.happyCount % 10 === 0 ) {
+        console.log( this.happyCount );
+        this.level -= 1;
+        console.log( this.level );
+      }
+      if( this.level % 5 === 0 ) {
+        this.health /= 1.01;
+        this.health = Math.floor( this.health );
+        this.energy /= 1.01;
+        this.energy = Math.floor( this.energy );
+        this.special /= 1.01;
+        this.energy = Math.floor( this.energy );
+      }
     }
-    if( this.level % 5 === 0 ) {
-      this.health *= 1.1;
-      this.energy *= 1.1;
-    }
+
   },
 
   checkForFoodAndWasteLevels: function() {
