@@ -45,7 +45,7 @@ BattleJamamoji.prototype = {
     } else {
       arena.splice( guy.position, 1 );
       guy.move( 1 );
-      guy.moveEnergy( 1 );
+      guy.moveEnergy( 10 );
       arena.splice( guy.position, 0, guy.icon );
     }
   },
@@ -59,7 +59,7 @@ BattleJamamoji.prototype = {
     } else {
       arena.splice( guy.position, 1 );
       guy.move( 2 );
-      guy.moveEnergy( 1 );
+      guy.moveEnergy( 10 );
       arena.splice( guy.position, 0, guy.icon );
       guy.endTurn( game );
     }
@@ -73,7 +73,7 @@ BattleJamamoji.prototype = {
     } else {
       arena.splice( guy.position, 1 );
       guy.move( -1 );
-      guy.moveEnergy( 1 );
+      guy.moveEnergy( 10 );
       arena.splice( guy.position, 0, guy.icon );
     }
   },
@@ -87,7 +87,7 @@ BattleJamamoji.prototype = {
     } else {
       arena.splice( guy.position, 1 );
       guy.move( -2 );
-      guy.moveEnergy( 1 );
+      guy.moveEnergy( 10 );
       arena.splice( guy.position, 0, guy.icon );
       guy.endTurn( game );
     }
@@ -97,8 +97,8 @@ BattleJamamoji.prototype = {
     if( this.energy <= 0 ) {
       return;
     } else {
-      this.block += 2;
-      guy1.moveEnergy( 1 );
+      this.block += 20;
+      guy1.moveEnergy( 10 );
     }
   },
 
@@ -116,21 +116,21 @@ BattleJamamoji.prototype = {
     } else if( this.energy <= 0 ) {
       return;
     } else {
-      guy2.punchSetup( 1 );
-      guy1.moveEnergy( 1 );
+      guy2.punchSetup( 10 );
+      guy1.moveEnergy( 10 );
     }
   },
 
   chanceOfBonusKickDamage: function() {
     var chance = Math.floor(Math.random() * 21);
     if( chance > 19 ) {
-      this.opponentBonus = 3;
+      this.opponentBonus = 30;
       return;
     } else if( chance > 7 ) {
-      this.opponentBonus = 2;
+      this.opponentBonus = 20;
       return;
     } else {
-      this.opponentBonus = 1;
+      this.opponentBonus = 10;
       return;
     }
   },
@@ -152,7 +152,7 @@ BattleJamamoji.prototype = {
     } else {
       guy2.chanceOfBonusKickDamage();
       guy2.kickSetup();
-      guy1.moveEnergy( 2 );
+      guy1.moveEnergy( 20 );
       this.opponentBonus = 0;
     }
   },
@@ -178,7 +178,7 @@ BattleJamamoji.prototype = {
     if( this.block < 0 ) {
       this.health += this.block;
     }
-    this.opponentSpecial = 0;
+    this.opponentSpecial -= 30;
     this.block = this.originalBlock;
   },
 
@@ -188,11 +188,11 @@ BattleJamamoji.prototype = {
       return;
     } else if( guy2.opponentSpecial === 0 ) {
       return;
-    } else if( this.energy <= 2 ) {
+    } else if( this.energy <= 20 ) {
       return;
     } else {
       guy2.specialSetup();
-      guy1.moveEnergy( 3 );
+      guy1.moveEnergy( 30 );
     }
   },
 
@@ -201,11 +201,11 @@ BattleJamamoji.prototype = {
   },
 
   addEnergy1: function() {
-    this.energy += 1;
+    this.energy += 10;
   },
 
   addEnergy2: function() {
-    this.energy += 2;
+    this.energy += 20;
   }
 
 }

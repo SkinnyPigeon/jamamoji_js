@@ -22,12 +22,12 @@ Game.prototype = {
     this.currentPlayer = this.players[0];
     this.otherPlayer = this.players[1];
     this.currentPlayer.block = this.currentPlayer.originalBlock;
-    if( this.currentPlayer.energy >= 3 ) {
+    if( this.currentPlayer.energy >= 30 ) {
       return;
-    } else if( this.currentPlayer.energy === 2 ) {
+    } else if( this.currentPlayer.energy === 20 ) {
       this.currentPlayer.addEnergy1();
       return;
-    } else if ( this.currentPlayer.energy <= 1 ) {
+    } else if ( this.currentPlayer.energy <= 10 ) {
       this.currentPlayer.addEnergy2();
       return;
     }

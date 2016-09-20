@@ -248,7 +248,7 @@
 	  this.name = name;
 	  this.icon = icon;
 	  this.food = [];
-	  this.energy = 3;
+	  this.energy = 30;
 	  this.waste = [];
 	  this.alive = true;
 	  this.ill = false;
@@ -256,10 +256,10 @@
 	  this.hungry = true;
 	  this.damage = 0;
 	  this.health = 100;
-	  this.special = 3;
+	  this.special = 30;
 	  this.opponentBonus = 0;
 	  this.block = 0;
-	  this.opponentSpecial = 3;
+	  this.opponentSpecial = 30;
 	  this.level = 1;
 	  this.happyCount = 0;
 	  this.foodCount = 0;
@@ -17497,7 +17497,7 @@
 	var FightView = function( jamamoji ) {
 	  var j1 = jamamoji;
 	  j1.position = 5;
-	  j1.energy = 150;
+	  // j1.energy = 150;
 	  var j2 = new Jamamoji( "dave", "😀" );
 	  j2.position = 8;
 	
@@ -17750,7 +17750,7 @@
 	    } else {
 	      arena.splice( guy.position, 1 );
 	      guy.move( 1 );
-	      guy.moveEnergy( 1 );
+	      guy.moveEnergy( 10 );
 	      arena.splice( guy.position, 0, guy.icon );
 	    }
 	  },
@@ -17764,7 +17764,7 @@
 	    } else {
 	      arena.splice( guy.position, 1 );
 	      guy.move( 2 );
-	      guy.moveEnergy( 1 );
+	      guy.moveEnergy( 10 );
 	      arena.splice( guy.position, 0, guy.icon );
 	      guy.endTurn( game );
 	    }
@@ -17778,7 +17778,7 @@
 	    } else {
 	      arena.splice( guy.position, 1 );
 	      guy.move( -1 );
-	      guy.moveEnergy( 1 );
+	      guy.moveEnergy( 10 );
 	      arena.splice( guy.position, 0, guy.icon );
 	    }
 	  },
@@ -17792,7 +17792,7 @@
 	    } else {
 	      arena.splice( guy.position, 1 );
 	      guy.move( -2 );
-	      guy.moveEnergy( 1 );
+	      guy.moveEnergy( 10 );
 	      arena.splice( guy.position, 0, guy.icon );
 	      guy.endTurn( game );
 	    }
@@ -17802,8 +17802,8 @@
 	    if( this.energy <= 0 ) {
 	      return;
 	    } else {
-	      this.block += 2;
-	      guy1.moveEnergy( 1 );
+	      this.block += 20;
+	      guy1.moveEnergy( 10 );
 	    }
 	  },
 	
@@ -17821,21 +17821,21 @@
 	    } else if( this.energy <= 0 ) {
 	      return;
 	    } else {
-	      guy2.punchSetup( 1 );
-	      guy1.moveEnergy( 1 );
+	      guy2.punchSetup( 10 );
+	      guy1.moveEnergy( 10 );
 	    }
 	  },
 	
 	  chanceOfBonusKickDamage: function() {
 	    var chance = Math.floor(Math.random() * 21);
 	    if( chance > 19 ) {
-	      this.opponentBonus = 3;
+	      this.opponentBonus = 30;
 	      return;
 	    } else if( chance > 7 ) {
-	      this.opponentBonus = 2;
+	      this.opponentBonus = 20;
 	      return;
 	    } else {
-	      this.opponentBonus = 1;
+	      this.opponentBonus = 10;
 	      return;
 	    }
 	  },
@@ -17857,7 +17857,7 @@
 	    } else {
 	      guy2.chanceOfBonusKickDamage();
 	      guy2.kickSetup();
-	      guy1.moveEnergy( 2 );
+	      guy1.moveEnergy( 20 );
 	      this.opponentBonus = 0;
 	    }
 	  },
@@ -17883,7 +17883,7 @@
 	    if( this.block < 0 ) {
 	      this.health += this.block;
 	    }
-	    this.opponentSpecial = 0;
+	    this.opponentSpecial -= 30;
 	    this.block = this.originalBlock;
 	  },
 	
@@ -17893,11 +17893,11 @@
 	      return;
 	    } else if( guy2.opponentSpecial === 0 ) {
 	      return;
-	    } else if( this.energy <= 2 ) {
+	    } else if( this.energy <= 20 ) {
 	      return;
 	    } else {
 	      guy2.specialSetup();
-	      guy1.moveEnergy( 3 );
+	      guy1.moveEnergy( 30 );
 	    }
 	  },
 	
@@ -17906,11 +17906,11 @@
 	  },
 	
 	  addEnergy1: function() {
-	    this.energy += 1;
+	    this.energy += 10;
 	  },
 	
 	  addEnergy2: function() {
-	    this.energy += 2;
+	    this.energy += 20;
 	  }
 	
 	}
@@ -17974,12 +17974,12 @@
 	    this.currentPlayer = this.players[0];
 	    this.otherPlayer = this.players[1];
 	    this.currentPlayer.block = this.currentPlayer.originalBlock;
-	    if( this.currentPlayer.energy >= 3 ) {
+	    if( this.currentPlayer.energy >= 30 ) {
 	      return;
-	    } else if( this.currentPlayer.energy === 2 ) {
+	    } else if( this.currentPlayer.energy === 20 ) {
 	      this.currentPlayer.addEnergy1();
 	      return;
-	    } else if ( this.currentPlayer.energy <= 1 ) {
+	    } else if ( this.currentPlayer.energy <= 10 ) {
 	      this.currentPlayer.addEnergy2();
 	      return;
 	    }

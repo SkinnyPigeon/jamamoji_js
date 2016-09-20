@@ -6,7 +6,7 @@ var Game = require( '../models/game' );
 var FightView = function( jamamoji ) {
   var j1 = jamamoji;
   j1.position = 5;
-  j1.energy = 150;
+  // j1.energy = 150;
   var j2 = new Jamamoji( "dave", "😀" );
   j2.position = 8;
 
